@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="RieltorApp.View.SearchArgument"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RieltorApp.ViewModel"
+             xmlns:local1="clr-namespace:RieltorApp.View" Height="350">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0" Grid.Column="0">
+            <Label>Район</Label>
+            <ComboBox>
+                <ComboBoxItem IsSelected="True">Центральный</ComboBoxItem>
+                <ComboBoxItem>Кузнецк</ComboBoxItem>
+            </ComboBox>
+            <Label>Цена (тыс. руб.)</Label>
+            <StackPanel Orientation="Horizontal">
+                <Label>от</Label>
+                <TextBox  Width="30" VerticalAlignment="Center" Text="{Binding MinPrice}"  BorderBrush="#FF0783EA"/>
+                <Label>до</Label>
+                <TextBox VerticalAlignment="Center" Width="30"  Text="{Binding MaxPrice}"  BorderBrush="#FF0783EA" />
+            </StackPanel>
+            <local1:RangeSlider x:Name="PriceSlider" Minimum="1" Maximum="100"/>
+
+            <Label>Количество комнат</Label>
+            <StackPanel Orientation="Horizontal">
+                <Button Padding="5" Margin="5">1</Button>
+                <Button Padding="5" Margin="5">2</Button>
+                <Button Padding="5" Margin="5">3</Button>
+                <Button Padding="5" Margin="5">4+</Button>
+                <Button Padding="5" Margin="5">Любое</Button>
+            </StackPanel>
+
+            <Label>Площадь</Label>
+            <StackPanel Orientation="Horizontal">
+                <Label>от</Label>
+                <TextBox  Width="30" VerticalAlignment="Center" Text="{Binding MinPrice}"  BorderBrush="#FF0783EA"/>
+                <Label>до</Label>
+                <TextBox VerticalAlignment="Center" Width="30"  Text="{Binding MaxPrice}"  BorderBrush="#FF0783EA" />
+            </StackPanel>
+            <local1:RangeSlider x:Name="SSlider" Minimum="1" Maximum="100"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Label>Этаж</Label>
+            <StackPanel Orientation="Horizontal">
+                <Label>от</Label>
+                <TextBox  Width="30" VerticalAlignment="Center" Text="{Binding MinPrice}"  BorderBrush="#FF0783EA"/>
+                <Label>до</Label>
+                <TextBox VerticalAlignment="Center" Width="30"  Text="{Binding MaxPrice}"  BorderBrush="#FF0783EA" />
+            </StackPanel>
+            <local1:RangeSlider x:Name="FloorSlider" Minimum="1" Maximum="20" UpperValue="10"/>
+            <Label>Этажность</Label>
+            <StackPanel Orientation="Horizontal">
+                <Label>от</Label>
+                <TextBox  Width="30" VerticalAlignment="Center" Text="{Binding MinPrice}"  BorderBrush="#FF0783EA"/>
+                <Label>до</Label>
+                <TextBox VerticalAlignment="Center" Width="30"  Text="{Binding MaxPrice}"  BorderBrush="#FF0783EA" />
+            </StackPanel>
+            <local1:RangeSlider x:Name="FloorsSlider" Minimum="1" Maximum="20" UpperValue="10"/>
+
+        </StackPanel>
+        <Button Margin="50,270,50,50" Padding="5" Grid.ColumnSpan="2" Command="{Binding SearchCommand}" CommandParameter="{x:Type local1:ResultView}" >Продолжить</Button>
+    </Grid>
+</UserControl>

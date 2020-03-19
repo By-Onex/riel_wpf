@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RieltorApp", "RieltorApp.csproj", "{6680A03F-660D-4DCA-970E-A0168F39D037}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6680A03F-660D-4DCA-970E-A0168F39D037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6680A03F-660D-4DCA-970E-A0168F39D037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6680A03F-660D-4DCA-970E-A0168F39D037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6680A03F-660D-4DCA-970E-A0168F39D037}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FC94682-9377-40F0-92E1-9A47BD994658}
+	EndGlobalSection
+EndGlobal

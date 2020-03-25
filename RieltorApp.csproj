@@ -150,6 +150,9 @@
     <Resource Include="Resource\building-ico.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="View\primer.png" />
+    <Resource Include="Resource\primer.png" />
+    <Resource Include="Resource\bg.jpg" />
     <Resource Include="Resource\building.png" />
     <Content Include="Resource\building.svg" />
   </ItemGroup>

@@ -4,31 +4,87 @@
              xmlns:local="clr-namespace:RieltorApp"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Green" />
-            <Setter Property="Template">
+       
+        <FontFamily x:Key="fntPrimary">Verdana</FontFamily>
+        <SolidColorBrush x:Key="clrPrimary" Color="#00AF64" />
+        <SolidColorBrush x:Key="clrTextPrimary" Color="White" />
+        <SolidColorBrush x:Key="clrSecondary" Color="#245A7A" />
+
+
+        <ControlTemplate x:Key="CustomToggleButton" TargetType="ToggleButton">
+            <Grid>
+                <Border Name="Border" />
+                <Border Name="SmallBorder" />
+                <Path Name="Arrow" />
+            </Grid>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+            <Setter Property="Control.Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                         <Border>
-                            <Border.Style>
-                                <Style TargetType="{x:Type Border}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#FF75F6FC"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="False">
-                                            <Setter Property="Background" Value="White" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <Grid>
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"  RecognizesAccessKey="True"></ContentPresenter>
-                            </Grid>
+                            <ContentPresenter />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        
+        <!-- COMBOBOX-->
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+            <Setter Property="FontFamily" Value="{StaticResource fntPrimary}"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton" Template="{StaticResource CustomToggleButton}" />
+
+                            <ContentPresenter Name="ContentSite"
+                                            Content="{TemplateBinding ComboBox.SelectionBoxItem}"
+                                             ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"/>
+                            <TextBox x:Name="PART_EditableTextBox" Foreground="{TemplateBinding Foreground}" IsReadOnly="{TemplateBinding IsReadOnly}"                                    Visibility="Hidden" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DefaultLabel" TargetType="{x:Type Label}">
+            <Setter Property="FontFamily" Value="{StaticResource fntPrimary}"/>
+            <Setter Property="Foreground" Value="#FF001B00" />
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        
+        <Style x:Key="NewStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource clrPrimary}"/>
+            <Setter Property="Foreground" Value="{StaticResource clrTextPrimary}"/>
+            <Setter Property="FontFamily" Value="{StaticResource fntPrimary}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1" Padding="1,8" Margin="17">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#218359"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#36D792" />
+                </Trigger>
+            </Style.Triggers>
+
         </Style>
     </Application.Resources>
 </Application>

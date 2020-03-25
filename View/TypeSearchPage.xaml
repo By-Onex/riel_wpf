@@ -9,16 +9,13 @@
       Title="Выберите тип поиска">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <Button Grid.Row="0" FontSize="45" FontWeight="Bold" Style="{StaticResource TransparentStyle}"  Command="{Binding Path=OpenArgCommand}" CommandParameter="{x:Type local:SearchArgument}">
-            <TextBlock TextWrapping="Wrap" TextAlignment="Center">Аренда</TextBlock>
-        </Button>
-        <Button Grid.Row="1" FontSize="45" FontWeight="Bold" Style="{StaticResource TransparentStyle}"   >
-            <TextBlock TextWrapping="Wrap" TextAlignment="Center">Покупка</TextBlock>
-        </Button>
+        <StackPanel VerticalAlignment="Center" Margin="45,0" >
+            <Button  Style="{StaticResource NewStyle}"  Command="{Binding Path=OpenArgCommand}" CommandParameter="{x:Type local:SearchArgument}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Аренда</TextBlock>
+            </Button>
+            <Button Style="{StaticResource NewStyle}" Command="{Binding Path=Update}" CommandParameter="{x:Type local:TypeSearchPage}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Покупка</TextBlock>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

@@ -3,9 +3,7 @@ using HtmlAgilityPack;
 using RieltorApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 
@@ -13,7 +11,6 @@ namespace RieltorApp.Scraper
 {
     public class AvitoScraper
     {
-
         public async Task<List<ApartmentModel>> GetApartments()
         {
             List<ApartmentModel> apartaments = new List<ApartmentModel>();
@@ -37,9 +34,7 @@ namespace RieltorApp.Scraper
                     price = variant.SelectSingleNode(".//span[contains(@class, 'snippet-price')]").InnerText.Trim()
                 });
             }
-
             return apartaments;
         }
-       
     }
 }

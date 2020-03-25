@@ -261,7 +261,7 @@
                             <Thumb x:Name="Thumb">
                                 <Thumb.Template>
                                     <ControlTemplate TargetType="Thumb">
-                                        <Rectangle Fill="#FF0097FF"
+                                        <Rectangle Fill="{StaticResource clrPrimary}"
                                     Stroke="Black"
                                     StrokeThickness="1"
                                     Width="10"
@@ -290,7 +290,7 @@
     </UserControl.Resources>
     <Grid VerticalAlignment="Top">
         <Border BorderThickness="0,1,0,0"
-        BorderBrush="Black"
+        BorderBrush="{StaticResource clrSecondary}"
         VerticalAlignment="Center"
         Height="1"
         Margin="5,0,5,0"/>

@@ -70,6 +70,9 @@
     <Compile Include="Model\StartMode.cs" />
     <Compile Include="ViewModel\ResultViewModel.cs" />
     <Compile Include="ViewModel\SearchArgumentViewModel.cs" />
+    <Compile Include="View\ApartmentListItemControl.xaml.cs">
+      <DependentUpon>ApartmentListItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RangeSlider.xaml.cs">
       <DependentUpon>RangeSlider.xaml</DependentUpon>
     </Compile>
@@ -86,6 +89,10 @@
       <DependentUpon>StartChangePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scraper\AvitoScraper.cs" />
+    <Page Include="View\ApartmentListItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

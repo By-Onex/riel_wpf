@@ -20,17 +20,21 @@ namespace RieltorApp.Scraper
             var httpClient = new HttpClient();
             string html = await httpClient.GetStringAsync(url);
 
-            Console.WriteLine("TEST");
+            
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(html);
 
             var all_variants = document.DocumentNode.SelectNodes("//div[contains(@class, 'item item_table')]");
-           
+            
             foreach (var variant in all_variants)
             {
+                //Console.WriteLine(variant.SelectSingleNode(".//span[contains(@class, 'snippet-price')]").InnerText.Trim());
+                //Console.WriteLine(variant.SelectSingleNode(".//a[contains(@class, 'snippet-link')]").InnerText.Trim());
+                
+              
                 apartaments.Add(new ApartmentModel()
                 {
-                    info = variant.SelectSingleNode(".//a[contains(@class, 'snippet-link js-snippet-link')]").InnerText.Trim(),
+                    info = variant.SelectSingleNode(".//a[contains(@class, 'snippet-link')]").InnerText.Trim(),
                     price = variant.SelectSingleNode(".//span[contains(@class, 'snippet-price')]").InnerText.Trim()
                 });
             }

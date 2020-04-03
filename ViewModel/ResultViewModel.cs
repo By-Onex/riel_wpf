@@ -14,14 +14,33 @@ namespace RieltorApp.ViewModel
 {
     public class ResultViewModel : INotifyPropertyChanged
     {
+        public static ResultViewModel Instatce => new ResultViewModel(); 
         public ICommand ChangePageCommand { get; set; }
-        private ListView _list;
-        public ResultViewModel(ListView list)
+        private List<ApartmentModel> _items;
+        public List<ApartmentModel> Items
         {
-            _list = list;
+            get => _items;
+            set
+            {
+                _items = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ResultViewModel()
+        {
+            Items = new List<ApartmentModel>()
+            {
+                new ApartmentModel()
+                {
+                    price = "20000000r",
+                    info = "test info2222"
+                }
+            };
+            
             ChangePageCommand = new BaseCommand(ChangePage);
             StartMode.Instanse.TextState = "Идет поиск";
-           GetAparts();
+            GetAparts();
         }
 
         private void ChangePage(object obj)
@@ -32,7 +51,7 @@ namespace RieltorApp.ViewModel
         public async void GetAparts()
         {
             var aparts = await new AvitoScraper().GetApartments();
-            _list.ItemsSource = aparts;
+            Items = aparts;
             StartMode.Instanse.TextState = "Ознакомьтесь с результатами поиска";
         }
 

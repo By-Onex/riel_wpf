@@ -4,25 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RieltorApp.View"
+             xmlns:local1="clr-namespace:RieltorApp.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="9*"></RowDefinition>
-        </Grid.RowDefinitions>
+             d:DesignHeight="385" d:DesignWidth="412">
 
-        <ListView x:Name="ResultList" Grid.Row="0">
+
+    <Grid DataContext="{x:Static local1:ResultViewModel.Instatce}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="61*"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Width="300">
+            <ItemsControl ItemsSource="{Binding Items}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:ApartmentListItemControl />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <!--<ListView x:Name="ResultList" Grid.Row="0" Background="{x:Null}" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <local:ApartmentListItemControl/>
+                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding info}" />
                         <TextBlock Text=" " />
                         <TextBlock Text="{Binding price}" />
-                    </StackPanel>
-                </DataTemplate>
+                    </StackPanel>-->
+            <!-- </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-        <Button Width="100" Margin="15" Grid.Row="1" Command="{Binding ChangePageCommand}" CommandParameter="{x:Type local:StartChangePage}">На главную</Button>
+        </ListView>-->
+        <Button Style="{StaticResource NewStyle}" Width="270" Grid.Row="1" Command="{Binding ChangePageCommand}" CommandParameter="{x:Type local:StartChangePage}" >На главную</Button>
     </Grid>
 </UserControl>

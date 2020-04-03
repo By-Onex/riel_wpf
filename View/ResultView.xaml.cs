@@ -24,7 +24,7 @@ namespace RieltorApp.View
         public ResultView()
         {
             InitializeComponent();
-            DataContext = new ResultViewModel(ResultList);
+            //DataContext = new ResultViewModel();
         }
     }
 }

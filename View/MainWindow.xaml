@@ -15,17 +15,38 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="{StaticResource clrPrimary}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition  Width="95*"></ColumnDefinition>
             <ColumnDefinition  Width="103*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <!--Информация -->
         <Grid Grid.Row="0" Grid.Column="0">
-            <Polygon Fill="{StaticResource clrPrimary}" Points="0,0 0,1 0.85,1 1,0" Stretch="Fill" HorizontalAlignment="Left"/>
+
+            <!--<Image Grid.ColumnSpan="2" Source="/RieltorApp;component/Resource/bg.jpg"  Panel.ZIndex="-1" HorizontalAlignment="Right">
+                <Image.Effect>
+                    <BlurEffect/>
+                </Image.Effect>
+            </Image>-->
+
+            <Polygon Points="0,0 0,1 0.85,1 1,0" Stretch="Fill" HorizontalAlignment="Left">
+                <Polygon.Fill>
+                    <ImageBrush ImageSource="/RieltorApp;component/Resource/bg.jpg" AlignmentX="Left" AlignmentY="Top" Stretch="UniformToFill" >
+                        <ImageBrush.Transform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ImageBrush.Transform>
+                       
+                    </ImageBrush>
+                </Polygon.Fill>
+            </Polygon>
             <!--<Image  Width="128" VerticalAlignment="Center" Margin="-20,-200,0,0" Source="/RieltorApp;component/Resource/building.png" />-->
-            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" Foreground="White" Margin="20,0,30,0" FontFamily="Verdana">
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding TextState}" FontWeight="Normal"  />
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" Foreground="#FF50A71F" Margin="20,0,30,0" FontFamily="Verdana" FontWeight="Bold">
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding TextState}" FontWeight="Bold" TextDecorations="{x:Null}" Foreground="White"  />
             </Label>
         </Grid>
         <!-- Контент -->
@@ -46,10 +67,10 @@
                 <ContentControl Grid.Row="1" Content="{ Binding PageContent }" />
             </Grid>
         </Grid>
-        <Image Grid.ColumnSpan="2" Source="/RieltorApp;component/Resource/bg.jpg"  Panel.ZIndex="-1" HorizontalAlignment="Right">
+       <!-- <Image Grid.ColumnSpan="2" Source="/RieltorApp;component/Resource/bg.jpg"  Panel.ZIndex="-1" HorizontalAlignment="Right">
             <Image.Effect>
                 <BlurEffect/>
             </Image.Effect>
-        </Image>
+        </Image>-->
     </Grid>
 </Window>

@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="RieltorApp.NewView.SearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RieltorApp.NewView"
+             xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="500">
+
+    <UserControl.Resources>
+        <viewModel:SearchViewModel x:Key="SearchViewModel" />
+    </UserControl.Resources>
+
+    <StackPanel DataContext="{StaticResource SearchViewModel}" Style="{StaticResource Def_StackPanel}">
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,3">
+
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Text="Район" Margin="5,0,5,10" Width="130" Style="{StaticResource ComboBoxFlatStyle}" IsReadOnly="True"  VerticalAlignment="Bottom" HorizontalAlignment="Center" SelectedValue="{Binding District}">
+                    <!--<ComboBoxItem IsSelected="True" Background="#FFF72626">Район</ComboBoxItem>-->
+                    <ComboBoxItem>Кузнецк</ComboBoxItem>
+                    <ComboBoxItem>Центральный</ComboBoxItem>
+                    <ComboBoxItem>Кузнецк</ComboBoxItem>
+                </ComboBox>
+
+                <GroupBox Header="Цена (тыс. руб.)" Style="{StaticResource Def_GroupBox}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Style="{StaticResource Def_Label}" Content="От"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MinPrice}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput" Width="50" MaxWidth="50"/>
+                        <Label Style="{StaticResource Def_Label}" Content="До"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MaxPrice}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput"  Width="50"  MaxWidth="50"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Площадь" Style="{StaticResource Def_GroupBox}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Style="{StaticResource Def_Label}" Content="От"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MinArea}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput"/>
+                        <Label Style="{StaticResource Def_Label}" Content="До"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MaxArea}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput"/>
+                    </StackPanel>
+                </GroupBox>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0">
+                <ComboBox Text="Комнаты" Width="130" Style="{StaticResource ComboBoxFlatStyle}" Margin="5,0,5,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" SelectedValue="{Binding RoomCount}" >
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>4+</ComboBoxItem>
+                </ComboBox>
+
+                <GroupBox Header="Этажность" Style="{StaticResource Def_GroupBox}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Style="{StaticResource Def_Label}" Content="От"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MinStoreys}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput"/>
+                        <Label Style="{StaticResource Def_Label}" Content="До"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MaxStoreys}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Этаж"  Style="{StaticResource Def_GroupBox}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Style="{StaticResource Def_Label}" Content="От"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MinFloor}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput"/>
+                        <Label Style="{StaticResource Def_Label}" Content="До"/>
+                        <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding MaxFloor}" VerticalAlignment="Center" PreviewTextInput="TextBox_PreviewTextInput"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+            
+            <Button Width="100" Margin="0,20,0,0" Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=SearchCommand}" CommandParameter="Null">
+                <TextBlock TextWrapping="Wrap">Поиск</TextBlock>
+            </Button>
+            
+        </StackPanel>
+    </StackPanel>
+</UserControl>

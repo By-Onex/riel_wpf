@@ -65,9 +65,40 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BaseCommand.cs" />
+    <Compile Include="Base\BaseCommand.cs" />
+    <Compile Include="Base\BaseViewModel.cs" />
+    <Compile Include="DesigndViewModel\ItemViewModel.cs" />
     <Compile Include="Model\ApartmentModel.cs" />
+    <Compile Include="Model\SearchModel.cs" />
     <Compile Include="Model\StartMode.cs" />
+    <Compile Include="NewModel\ApartmentModel.cs" />
+    <Compile Include="NewModel\SearchArgumentModel.cs" />
+    <Compile Include="NewViewModel\MainViewModel.cs" />
+    <Compile Include="NewViewModel\ResultViewModel.cs" />
+    <Compile Include="NewViewModel\SearchViewModel.cs" />
+    <Compile Include="NewViewModel\StartMenuViewModel.cs" />
+    <Compile Include="NewViewModel\TypeSearchViewModel.cs" />
+    <Compile Include="NewView\AnimationCircle.xaml.cs">
+      <DependentUpon>AnimationCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\ResultItemView.xaml.cs">
+      <DependentUpon>ResultItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\StartMenuView.xaml.cs">
+      <DependentUpon>StartMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\TypeSearchView.xaml.cs">
+      <DependentUpon>TypeSearchView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ResultViewModel.cs" />
     <Compile Include="ViewModel\SearchArgumentViewModel.cs" />
     <Compile Include="View\ApartmentListItemControl.xaml.cs">
@@ -89,6 +120,34 @@
       <DependentUpon>StartChangePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scraper\AvitoScraper.cs" />
+    <Page Include="NewView\AnimationCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\ResultItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\ResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\StartMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\TypeSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ApartmentListItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,10 +216,19 @@
     <Resource Include="Resource\building-ico.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\newBg.jpg" />
+    <Resource Include="Resource\favourite %281%29.png" />
+    <Resource Include="Resource\favourite %282%29.png" />
+    <Resource Include="Resource\tag %283%29.png" />
+    <Resource Include="Resource\tag %282%29.png" />
+    <Resource Include="Resource\tag %281%29.png" />
+    <Resource Include="Resource\tag.png" />
+    <Resource Include="Resource\favourite.png" />
     <Resource Include="View\primer.png" />
     <Resource Include="Resource\primer.png" />
     <Resource Include="Resource\bg.jpg" />
     <Resource Include="Resource\building.png" />
+    <Resource Include="NewView\newBg.jpg" />
     <Content Include="Resource\building.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

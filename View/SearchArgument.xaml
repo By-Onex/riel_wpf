@@ -14,11 +14,28 @@
             <RowDefinition Height="76*"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="0" Grid.Column="0">
-            <Label Style="{StaticResource DefaultLabel}">Район</Label>
-            <ComboBox Style="{StaticResource ComboBoxStyle1}" Width="145" HorizontalAlignment="Left" Margin="5,0,0,0">
-                <ComboBoxItem IsSelected="True">Центральный</ComboBoxItem>
-                <ComboBoxItem>Кузнецк</ComboBoxItem>
-            </ComboBox>
+            <GroupBox Header="Район" Background="#FF0AA764" Foreground="White" BorderBrush="{x:Null}" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" ClipToBounds="True" Margin="0,0,15,0">
+                <ComboBox Style="{StaticResource ComboBoxStyle1}" Width="145" HorizontalAlignment="Left" Margin="5,0,0,0">
+                    <ComboBoxItem IsSelected="True">Центральный</ComboBoxItem>
+                    <ComboBoxItem>Кузнецк</ComboBoxItem>
+                </ComboBox>
+            </GroupBox>
+
+            <GroupBox Grid.Column="0" Header="Цена" Background="#FF0AA764" Foreground="White" BorderBrush="{x:Null}" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" ClipToBounds="True">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Style="{StaticResource DefaultLabel}">от</Label>
+                        <TextBox Style="{StaticResource DefaultTextBox}"  Width="30" VerticalAlignment="Center" Text="{Binding MinPrice}" />
+                        <Label Style="{StaticResource DefaultLabel}">до</Label>
+                        <TextBox Style="{StaticResource DefaultTextBox}" VerticalAlignment="Center" Width="30"  Text="{Binding MaxPrice}"  BorderBrush="#FF0783EA" />
+                    </StackPanel>
+                    <local1:RangeSlider x:Name="PriceSlider" Minimum="1" Maximum="100"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!--<Label Style="{StaticResource DefaultLabel}">Район</Label>-->
+            
+            
             <Label Style="{StaticResource DefaultLabel}">Цена (тыс. руб.)</Label>
             <StackPanel Orientation="Horizontal">
                 <Label Style="{StaticResource DefaultLabel}">от</Label>
@@ -26,7 +43,7 @@
                 <Label Style="{StaticResource DefaultLabel}">до</Label>
                 <TextBox Style="{StaticResource DefaultTextBox}" VerticalAlignment="Center" Width="30"  Text="{Binding MaxPrice}"  BorderBrush="#FF0783EA" />
             </StackPanel>
-            <local1:RangeSlider x:Name="PriceSlider" Minimum="1" Maximum="100"/>
+            <!--<local1:RangeSlider x:Name="PriceSlider" Minimum="1" Maximum="100"/>-->
 
             <Label Style="{StaticResource DefaultLabel}">Количество комнат</Label>
             <StackPanel Orientation="Horizontal">

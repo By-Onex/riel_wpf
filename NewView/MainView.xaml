@@ -1,0 +1,72 @@
+﻿<Window x:Class="RieltorApp.NewView.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RieltorApp.NewView"
+        xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
+        mc:Ignorable="d"
+        Title="PHouse" Height="450" Width="800">
+    <Grid DataContext="{x:Static viewModel:MainViewModel.Instance}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="450"/>
+        </Grid.RowDefinitions>
+        <StackPanel Background="White" >
+
+        </StackPanel>
+        <Image Source="newBg.jpg" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"></Image>
+
+        <!--<ScrollViewer VerticalScrollBarVisibility="Disabled" Grid.Row="1" Name="scroll" CanContentScroll="True">-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+               
+                <DockPanel Height="420" Grid.Row="0" Margin="0" x:Name="UpperPanel">
+                    <Border MinWidth="500"  CornerRadius="4" Background="#99FFFFFF" BorderBrush="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel  >
+                            <TextBlock TextWrapping="Wrap" FontFamily="Malgun Gothic" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,20,0,0" Padding="0" Text="{Binding PageStateText}"></TextBlock>
+                            <ContentControl Content="{ Binding PageContent }" />
+                        </StackPanel>
+                    </Border>
+
+                <DockPanel.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding GoBottom}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard x:Name="GoBottomAnimation">
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,-450,0,0" Duration="0:0:0.5"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="GoBottomAnimation" />
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding GoTop}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard x:Name="GoTopAnimation">
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,0,0,0" Duration="0:0:0.5"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="GoTopAnimation" />
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DockPanel.Style>
+            </DockPanel>
+
+                <local:ResultView Margin="0" Grid.Row="1"/>
+            </Grid>
+
+       
+    </Grid>
+</Window>

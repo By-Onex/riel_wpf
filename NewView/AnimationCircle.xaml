@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="RieltorApp.NewView.AnimationCircle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RieltorApp.NewView"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="150">
+    <Grid>
+        <Ellipse Width="150" Height="150" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <RotateTransform Angle="0" />
+            </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="{StaticResource cGrayPink}" Offset="0"/>
+                    <GradientStop Color="{StaticResource cGrayPink}" Offset="0.2"/>
+                    <GradientStop Color="White" Offset="0.2"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Ellipse.Fill>
+
+
+            <Ellipse.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowAnimation}" Value="Visible">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="GoAnimationRotate">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Ellipse.RenderTransform).(RotateTransform.Angle)" To="360" Duration="0:0:0.8" RepeatBehavior="Forever"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <DataTrigger  Binding="{Binding ShowAnimation}" Value="Hidden">
+                            <DataTrigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="GoAnimationRotate" />
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Ellipse.Style>
+        </Ellipse>
+        <Ellipse Width="140" Height="140" Fill="White"/>
+        <Label FontFamily="{StaticResource MalgunFont}" FontWeight="Bold" FontSize="18" Foreground="{StaticResource GrayPink}" Content="Поиск" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

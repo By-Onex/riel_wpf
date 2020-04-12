@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="RieltorApp.NewView.TypeSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RieltorApp.NewView"
+             xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="500">
+    
+    <UserControl.Resources>
+        <viewModel:TypeSearchViewModel x:Key="TypeSearchViewModel" />
+    </UserControl.Resources>
+    <StackPanel DataContext="{StaticResource TypeSearchViewModel}" Style="{StaticResource Def_StackPanel}">
+
+        <Button Style="{StaticResource Def_Button}" Command="{Binding Path=OpenPage}" CommandParameter="{x:Type local:SearchView}" Margin="0,0,10,0">
+            <TextBlock TextWrapping="Wrap">Покупка</TextBlock>
+        </Button>
+        <Button Style="{StaticResource Def_Button}" Margin="0,0,10,0">
+            <TextBlock TextWrapping="Wrap">Аренда</TextBlock>
+        </Button>
+    </StackPanel>
+</UserControl>

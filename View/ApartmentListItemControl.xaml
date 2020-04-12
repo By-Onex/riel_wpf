@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="RieltorApp.View.ApartmentListItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RieltorApp.DesigndViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="400">
+    <Grid Cursor="Arrow" DataContext="{x:Static local:ItemViewModel.Instance}" Background="{StaticResource clrPrimary}" Margin="0,5,0,5" Height="150">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Image Width="150" Height="150" Source="/RieltorApp;component/Resource/primer.png" Stretch="UniformToFill" />
+        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+            <StackPanel  Orientation="Horizontal">
+                <!--<Image  Grid.Column="1" Width="16" Height="16" Source="/RieltorApp;component/Resource/tag (2).png" Margin="0,0,5,0" />-->
+                <Label Style="{StaticResource ItemLabel}" Content="{Binding price}"/>
+            </StackPanel>
+            <Label Style="{StaticResource ItemLabel}"  Content="{Binding info}"/>
+            <Label Style="{StaticResource ItemLabel}">р-н Центральный</Label>
+            <Label Style="{StaticResource ItemLabel}">улица Циолковского, 13</Label>
+        </StackPanel>
+        <Image Cursor="Hand"  Grid.Column="1" Width="16" Height="16" Source="/RieltorApp;component/Resource/favourite (2).png" Stretch="UniformToFill" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" />
+    </Grid>
+</UserControl>

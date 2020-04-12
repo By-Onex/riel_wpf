@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="RieltorApp.NewView.ResultItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RieltorApp.NewViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="330" d:DesignWidth="200" Margin="10,10,10,10">
+    <StackPanel >
+        <Label Style="{StaticResource Def_Label}" Content="{Binding District}" HorizontalAlignment="Center" Padding="3"/>
+        <Label Style="{StaticResource Def_Label}" Content="{Binding Address}" HorizontalAlignment="Center"  Padding="3"/>
+        <Label Style="{StaticResource Def_Label}" Content="{Binding Info}" HorizontalAlignment="Center"  Padding="3"/>
+       <!-- <Label Style="{StaticResource Def_Label}" Content="1-к квартира, 45 м², 4/5 эт." HorizontalAlignment="Center"/>-->
+        <Label Style="{StaticResource Def_Label}" Content="{Binding PriceInfo}" HorizontalAlignment="Center"  Padding="3,3,3,5"/>
+        <Image Width="200" Height="120" Source="/RieltorApp;component/Resource/primer.png" Stretch="UniformToFill" />
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0">В избранное</Button>
+            <Button Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,15,0,0" Command="{Binding ElementName=ResultList, Path=DataContext.OpenWebPage}" CommandParameter="{Binding Url}">Открыть</Button>
+        </StackPanel>
+        
+    </StackPanel>
+</UserControl>

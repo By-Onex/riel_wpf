@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="RieltorApp.NewView.StartMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RieltorApp.NewView"
+             xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="500">
+
+    <UserControl.Resources>
+        <viewModel:StartMenuViewModel x:Key="StartMenuViewModel" />
+    </UserControl.Resources>
+
+    <StackPanel DataContext="{StaticResource StartMenuViewModel}" Style="{StaticResource Def_StackPanel}">
+
+        <Button Style="{StaticResource Def_Button}" Command="{Binding Path=OpenPage}" CommandParameter="{x:Type local:TypeSearchView}" Margin="0,0,10,0">
+            <TextBlock TextWrapping="Wrap">Поиск недвижимости</TextBlock>
+        </Button>
+
+        <Button Style="{StaticResource Def_Button}" Margin="0,0,10,0">
+            <TextBlock TextWrapping="Wrap">Избранное</TextBlock>
+        </Button>
+
+        <Button  Style="{StaticResource Def_Button}">
+            <TextBlock TextWrapping="Wrap">Автоматичекий поиск</TextBlock>
+        </Button>
+    </StackPanel>
+</UserControl>

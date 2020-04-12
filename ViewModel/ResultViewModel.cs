@@ -37,23 +37,17 @@ namespace RieltorApp.ViewModel
                     info = "test info2222"
                 }
             };
-            
+            /*
             ChangePageCommand = new BaseCommand(ChangePage);
             StartMode.Instanse.TextState = "Идет поиск";
-            GetAparts();
+            GetAparts();*/
         }
 
-        private void ChangePage(object obj)
+        /*private void ChangePage(object obj)
         {
             StartMode.Instanse.UpdateView((Page)Activator.CreateInstance((Type)obj), "С чем работать?");
-        }
+        }*/
 
-        public async void GetAparts()
-        {
-            var aparts = await new AvitoScraper().GetApartments();
-            Items = aparts;
-            StartMode.Instanse.TextState = "Ознакомьтесь с результатами поиска";
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

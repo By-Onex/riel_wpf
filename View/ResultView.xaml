@@ -14,7 +14,7 @@
             <RowDefinition Height="61*"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Width="300">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Width="400">
             <ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

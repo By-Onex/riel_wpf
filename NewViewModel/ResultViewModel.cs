@@ -44,7 +44,6 @@ namespace RieltorApp.NewViewModel
             }
         }
         public ICommand ReturnToTop { get; set; }
-
         public ICommand OpenWebPage { get; set; }
         private ResultViewModel()
         {
@@ -54,6 +53,8 @@ namespace RieltorApp.NewViewModel
             ReturnToTop = new BaseCommand(o =>
             {
                 MainViewModel.Instance.GoTop = true;
+                ShowResult = Visibility.Hidden;
+                ShowAnimation = Visibility.Hidden;
             });
 
             OpenWebPage = new BaseCommand(url =>

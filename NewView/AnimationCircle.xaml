@@ -32,11 +32,14 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
-                        </DataTrigger>
-                        <DataTrigger  Binding="{Binding ShowAnimation}" Value="Hidden">
                             <DataTrigger.ExitActions>
                                 <StopStoryboard BeginStoryboardName="GoAnimationRotate" />
                             </DataTrigger.ExitActions>
+                        </DataTrigger>
+                        <DataTrigger  Binding="{Binding ShowAnimation}" Value="Hidden">
+                            <DataTrigger.EnterActions>
+                                <StopStoryboard BeginStoryboardName="GoAnimationRotate" />
+                            </DataTrigger.EnterActions>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

@@ -9,9 +9,7 @@ namespace RieltorApp.NewViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        private static MainViewModel _instance = new MainViewModel();
-
-        public static MainViewModel Instance { get => _instance; }
+        public static MainViewModel Instance { get; } = new MainViewModel();
         private object _pageContent;
         public object PageContent
         {

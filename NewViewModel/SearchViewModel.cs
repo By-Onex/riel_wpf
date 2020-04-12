@@ -138,6 +138,7 @@ namespace RieltorApp.NewViewModel
             {
                 MainViewModel.Instance.GoBottom = true;
                 ResultViewModel.Instance.ShowAnimation = Visibility.Visible;
+                ResultViewModel.Instance.ShowResult = Visibility.Hidden;
                 GetAparts();
             });
         }

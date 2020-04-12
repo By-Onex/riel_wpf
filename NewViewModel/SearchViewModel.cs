@@ -1,10 +1,5 @@
 ﻿using RieltorApp.NewModel;
 using RieltorApp.Scraper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -73,6 +68,13 @@ namespace RieltorApp.NewViewModel
             set
             {
                 _searchModel.MinArea = CheckValue(value);
+                if (_searchModel.MinArea > _searchModel.MaxArea)
+                {
+                    int max = _searchModel.MinPrice;
+                    _searchModel.MinArea = _searchModel.MaxArea;
+                    MaxArea = max.ToString();
+                }
+                
                 NotifyPropertyChanged();
             }
         }
@@ -147,8 +149,14 @@ namespace RieltorApp.NewViewModel
         {
             var aparts = await new AvitoScraper().GetApartments(_searchModel);
             ResultViewModel.Instance.Items = aparts;
+
             ResultViewModel.Instance.ShowAnimation = Visibility.Hidden;
             ResultViewModel.Instance.ShowResult = Visibility.Visible;
+            if (aparts.Count == 0)
+            {
+                ResultViewModel.Instance.ShowStatus = Visibility.Visible;
+                ResultViewModel.Instance.ShowResult = Visibility.Hidden;
+            }
         }
     }
 }

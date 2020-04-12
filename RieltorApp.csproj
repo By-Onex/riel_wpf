@@ -68,9 +68,6 @@
     <Compile Include="Base\BaseCommand.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="DesigndViewModel\ItemViewModel.cs" />
-    <Compile Include="Model\ApartmentModel.cs" />
-    <Compile Include="Model\SearchModel.cs" />
-    <Compile Include="Model\StartMode.cs" />
     <Compile Include="NewModel\ApartmentModel.cs" />
     <Compile Include="NewModel\SearchArgumentModel.cs" />
     <Compile Include="NewViewModel\MainViewModel.cs" />
@@ -98,26 +95,6 @@
     </Compile>
     <Compile Include="NewView\TypeSearchView.xaml.cs">
       <DependentUpon>TypeSearchView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModel\ResultViewModel.cs" />
-    <Compile Include="ViewModel\SearchArgumentViewModel.cs" />
-    <Compile Include="View\ApartmentListItemControl.xaml.cs">
-      <DependentUpon>ApartmentListItemControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\RangeSlider.xaml.cs">
-      <DependentUpon>RangeSlider.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ResultView.xaml.cs">
-      <DependentUpon>ResultView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SearchArgument.xaml.cs">
-      <DependentUpon>SearchArgument.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TypeSearchPage.xaml.cs">
-      <DependentUpon>TypeSearchPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\StartChangePage.xaml.cs">
-      <DependentUpon>StartChangePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scraper\AvitoScraper.cs" />
     <Page Include="NewView\AnimationCircle.xaml">
@@ -148,42 +125,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ApartmentListItemControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="View\RangeSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ResultView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SearchArgument.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TypeSearchPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\StartChangePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -224,7 +169,6 @@
     <Resource Include="Resource\tag %281%29.png" />
     <Resource Include="Resource\tag.png" />
     <Resource Include="Resource\favourite.png" />
-    <Resource Include="View\primer.png" />
     <Resource Include="Resource\primer.png" />
     <Resource Include="Resource\bg.jpg" />
     <Resource Include="Resource\building.png" />

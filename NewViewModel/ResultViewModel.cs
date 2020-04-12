@@ -33,7 +33,6 @@ namespace RieltorApp.NewViewModel
             }
         }
         private Visibility _showAnimation;
-        
         public Visibility ShowAnimation
         {
             get => _showAnimation;
@@ -43,18 +42,33 @@ namespace RieltorApp.NewViewModel
                 NotifyPropertyChanged();
             }
         }
+        private Visibility _showStatus;
+        public Visibility ShowStatus
+        {
+            get => _showStatus;
+            set
+            {
+                _showStatus = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ICommand ReturnToTop { get; set; }
         public ICommand OpenWebPage { get; set; }
         private ResultViewModel()
         {
             Items = new List<ApartmentModel>();
+
             ShowAnimation = Visibility.Hidden;
             ShowResult = Visibility.Hidden;
+            ShowStatus = Visibility.Hidden;
+
             ReturnToTop = new BaseCommand(o =>
             {
                 MainViewModel.Instance.GoTop = true;
                 ShowResult = Visibility.Hidden;
                 ShowAnimation = Visibility.Hidden;
+                ShowStatus = Visibility.Hidden;
             });
 
             OpenWebPage = new BaseCommand(url =>

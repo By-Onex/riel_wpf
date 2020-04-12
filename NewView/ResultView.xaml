@@ -16,6 +16,7 @@
     <Grid Background="White" DataContext="{x:Static viewModel:ResultViewModel.Instance }">
 
         <local:AnimationCircle Visibility="{Binding ShowAnimation }"/>
+        <Label Visibility="{Binding ShowStatus }" Foreground="{StaticResource GrayPink}" FontWeight="Bold"  FontFamily="{StaticResource MalgunFont}" FontSize="22" Content="По вашему запросу ничего не найдено" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ItemsControl x:Name="ResultList" Margin="20,20,0,0"  Style="{StaticResource Def_IC}" ItemsSource="{Binding Items}" Height="415" Visibility="{Binding ShowResult}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

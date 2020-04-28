@@ -23,7 +23,6 @@ namespace RieltorApp.NewViewModel
                 }
             }
         }
-
         private string _roomCount;
         public string RoomCount
         {
@@ -37,7 +36,6 @@ namespace RieltorApp.NewViewModel
                 }
             }
         }
-
         public string MinPrice {
             get => _searchModel.MinPrice.ToString();
             set
@@ -61,7 +59,6 @@ namespace RieltorApp.NewViewModel
                 NotifyPropertyChanged();
             }
         }
-
         public string MinArea
         {
             get => _searchModel.MinArea.ToString();
@@ -87,7 +84,6 @@ namespace RieltorApp.NewViewModel
                 NotifyPropertyChanged();
             }
         }
-
         public string MinStoreys
         {
             get => _searchModel.MinStoreys.ToString();
@@ -106,7 +102,6 @@ namespace RieltorApp.NewViewModel
                 NotifyPropertyChanged();
             }
         }
-
         public string MinFloor
         {
             get => _searchModel.MinFloor.ToString();
@@ -125,14 +120,12 @@ namespace RieltorApp.NewViewModel
                 NotifyPropertyChanged();
             }
         }
-
         private int CheckValue(string val)
         {
             int num;
             int.TryParse(val, out num);
             return num;
         }
-
         public SearchViewModel()
         {
             _searchModel = MainViewModel.Instance.SearchArgumentModel;
@@ -141,22 +134,8 @@ namespace RieltorApp.NewViewModel
                 MainViewModel.Instance.GoBottom = true;
                 ResultViewModel.Instance.ShowAnimation = Visibility.Visible;
                 ResultViewModel.Instance.ShowResult = Visibility.Hidden;
-                GetAparts();
+                _searchModel.GetAparts();
             });
-        }
-
-        public async void GetAparts()
-        {
-            var aparts = await new AvitoScraper().GetApartments(_searchModel);
-            ResultViewModel.Instance.Items = aparts;
-
-            ResultViewModel.Instance.ShowAnimation = Visibility.Hidden;
-            ResultViewModel.Instance.ShowResult = Visibility.Visible;
-            if (aparts.Count == 0)
-            {
-                ResultViewModel.Instance.ShowStatus = Visibility.Visible;
-                ResultViewModel.Instance.ShowResult = Visibility.Hidden;
-            }
         }
     }
 }

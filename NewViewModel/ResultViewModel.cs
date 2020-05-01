@@ -1,4 +1,5 @@
-﻿using RieltorApp.NewModel;
+﻿using RieltorApp.DB;
+using RieltorApp.NewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace RieltorApp.NewViewModel
     public class ResultViewModel : BaseViewModel
     {
         public static ResultViewModel Instance { get; } = new ResultViewModel();
-        public List<ApartmentModel> _items;
-        public List<ApartmentModel> Items
+        public List<ApartmentItem> _items;
+        public List<ApartmentItem> Items
         {
             get => _items; set
             {
@@ -55,9 +56,10 @@ namespace RieltorApp.NewViewModel
 
         public ICommand ReturnToTop { get; set; }
         public ICommand OpenWebPage { get; set; }
+        public ICommand AddFavorite { get; set; }
         private ResultViewModel()
         {
-            Items = new List<ApartmentModel>();
+            Items = new List<ApartmentItem>();
 
             ShowAnimation = Visibility.Hidden;
             ShowResult = Visibility.Hidden;
@@ -74,6 +76,14 @@ namespace RieltorApp.NewViewModel
             OpenWebPage = new BaseCommand(url =>
             {
                 System.Diagnostics.Process.Start(url.ToString());
+            });
+
+            AddFavorite = new BaseCommand(apart =>
+            {
+                if(apart is ApartmentItem)
+                {
+                    FavoriteModel.AddFavorite(apart as ApartmentItem);
+                }
             });
         }
     }

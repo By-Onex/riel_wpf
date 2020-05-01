@@ -20,7 +20,6 @@ namespace RieltorApp.NewModel
         public string Address { get => string.Format("{0}, {1}", Street, Num); }
         public string Info { get => string.Format("{0}-к квартира {1} м. {2}/{3} эт.", RoomCount, Area, Floor, Storeys); }
         public string Url { get; set; } = "";
-
         public string Url_Img { get; set; } = "/RieltorApp;component/Resource/newBg.jpg";
     }
 }

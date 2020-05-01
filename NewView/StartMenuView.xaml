@@ -18,7 +18,7 @@
             <TextBlock TextWrapping="Wrap">Поиск недвижимости</TextBlock>
         </Button>
 
-        <Button Style="{StaticResource Def_Button}" Margin="0,0,10,0">
+        <Button Style="{StaticResource Def_Button}" Command="{Binding Path=FavoritePage}" CommandParameter="Null" Margin="0,0,10,0">
             <TextBlock TextWrapping="Wrap">Избранное</TextBlock>
         </Button>
 

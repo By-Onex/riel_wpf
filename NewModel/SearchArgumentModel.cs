@@ -1,4 +1,5 @@
 ﻿using RieltorApp.Base;
+using RieltorApp.DB;
 using RieltorApp.NewViewModel;
 using RieltorApp.Scraper;
 using System;
@@ -34,7 +35,7 @@ namespace RieltorApp.NewModel
             var tasks = _scrapers.ToList().Select(async s => await s.GetApartments(this));
             var tasks_result = await Task.WhenAll(tasks);
 
-            var aparts = new List<ApartmentModel>();
+            var aparts = new List<ApartmentItem>();
             tasks_result.ToList().ForEach((t) => aparts.AddRange(t));
 
             ResultViewModel.Instance.Items = aparts;

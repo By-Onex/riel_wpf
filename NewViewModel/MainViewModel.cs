@@ -1,5 +1,6 @@
 ﻿using RieltorApp.NewModel;
 using RieltorApp.NewView;
+using RieltorApp.DB;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +33,7 @@ namespace RieltorApp.NewViewModel
         public SearchArgumentModel SearchArgumentModel = new SearchArgumentModel();
         private MainViewModel()
         {
+            DataBase.Connect();
             PageContent = new StartMenuView().Content;
             PageStateText = "Добро пожаловать! С чем работать?";
         }

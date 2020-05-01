@@ -18,9 +18,9 @@ namespace RieltorApp.NewView
     /// <summary>
     /// Логика взаимодействия для ResultItemView.xaml
     /// </summary>
-    public partial class ResultItemView : UserControl
+    public partial class ApartmentItemView : UserControl
     {
-        public ResultItemView()
+        public ApartmentItemView()
         {
             InitializeComponent();
         }

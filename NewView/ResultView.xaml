@@ -7,12 +7,7 @@
              xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
              mc:Ignorable="d" 
              d:DesignWidth="800" Height="420">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
-    </UserControl.Resources>
-    <!--<UserControl.Resources>
-        <viewModel:ResultViewModel x:Key="ResultViewModel" />
-    </UserControl.Resources>-->
+
     <Grid Background="White" DataContext="{x:Static viewModel:ResultViewModel.Instance }">
 
         <local:AnimationCircle Visibility="{Binding ShowAnimation }"/>
@@ -20,7 +15,7 @@
         <ItemsControl x:Name="ResultList" Margin="20,0,0,0"  Style="{StaticResource Def_IC}" ItemsSource="{Binding Items}"  Visibility="{Binding ShowResult}" VerticalAlignment="Top">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:ResultItemView/>
+                    <local:ApartmentItemView/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

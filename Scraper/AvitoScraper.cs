@@ -1,6 +1,7 @@
 ﻿
 using HtmlAgilityPack;
 using RieltorApp.Base;
+using RieltorApp.DB;
 using RieltorApp.NewModel;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace RieltorApp.Scraper
 {
     public class AvitoScraper : BaseScraper
     {
-        public override async Task<List<ApartmentModel>> GetApartments(SearchArgumentModel argumentModel)
+        public override async Task<List<ApartmentItem>> GetApartments(SearchArgumentModel argumentModel)
         {
-            List<ApartmentModel> apartaments = new List<ApartmentModel>();
+            List<ApartmentItem> apartaments = new List<ApartmentItem>();
 
             var url = "https://www.avito.ru/novokuznetsk/kvartiry?cd=1";
 
@@ -64,90 +65,21 @@ namespace RieltorApp.Scraper
 
 
                     
-                    var apart = new ApartmentModel()
+                    var apart = new ApartmentItem()
                     {
                         Area = float.Parse(area),
                         RoomCount = int.Parse(roomCount),
                         Floor = int.Parse(floor),
                         Storeys = int.Parse(storeys),
                         Price = int.Parse(price),
-                        Street = street,
-                        Num = num,
-                        District = district,
-                        Url = "https://www.avito.ru" + page_url,
-                        Url_Img = url_img
-                    };
-
-                    if (argumentModel.MaxPrice * 1000 >= apart.Price && argumentModel.MinPrice * 1000 <= apart.Price &&
-                        argumentModel.MaxFloor >= apart.Floor && argumentModel.MinFloor <= apart.Floor &&
-                        argumentModel.MaxStoreys >= apart.Storeys && argumentModel.MinStoreys <= apart.Storeys)
-                        apartaments.Add(apart);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    continue;
-                }
-            }
-            return apartaments;
-        }
-
-        public override List<ApartmentModel> GetSyncApartments(SearchArgumentModel argumentModel)
-        {
-            List<ApartmentModel> apartaments = new List<ApartmentModel>();
-
-            var url = "https://www.avito.ru/novokuznetsk/kvartiry?cd=1";
-
-            var httpClient = new HttpClient();
-            string html = httpClient.GetStringAsync(url).Result;
-
-
-            HtmlDocument document = new HtmlDocument();
-            document.LoadHtml(html);
-
-            var all_variants = document.DocumentNode.SelectNodes("//div[contains(@class, 'item item_table')]");
-
-            foreach (var variant in all_variants)
-            {
-                try
-                {
-                    string price = variant.SelectSingleNode(".//span[contains(@class, 'snippet-price')]").InnerText.Trim();
-                    price = Regex.Replace(price, "[^0-9]", "");
-                    if (string.IsNullOrEmpty(price)) continue;
-
-                    string[] info = variant.SelectSingleNode(".//a[contains(@class, 'snippet-link')]").InnerText.Trim().Split(',');
-                    if (info.Length != 3) continue;
-                    string roomCount = Regex.Replace(info[0], "[^0-9]", "");
-                    if (string.IsNullOrEmpty(roomCount)) continue;
-                    string area = Regex.Replace(info[1], "[^0-9.]", "").Replace('.', ',');
-                    string[] floors = info[2].Split('/');
-
-                    string floor = Regex.Replace(floors[0], "[^0-9]", "");
-                    string storeys = Regex.Replace(floors[1], "[^0-9]", "");
-
-                    string[] address = variant.SelectSingleNode(".//span[contains(@class, 'item-address__string')]").InnerText.Trim().Split(',');
-
-                    if (address.Length < 2) continue;
-                    string street = address[address.Length - 2];
-                    string num = address[address.Length - 1];
-
-                    if (variant.SelectSingleNode(".//span[contains(@class, 'item-address-georeferences')]") == null)
-                        continue;
-                    string district = variant.SelectSingleNode(".//span[contains(@class, 'item-address-georeferences')]").InnerText.Trim();
-
-                    string page_url = variant.SelectSingleNode(".//a[contains(@class, 'snippet-link')]").GetAttributeValue("href", "");
-
-                    var apart = new ApartmentModel()
-                    {
-                        Area = float.Parse(area),
-                        RoomCount = int.Parse(roomCount),
-                        Floor = int.Parse(floor),
-                        Storeys = int.Parse(storeys),
-                        Price = int.Parse(price),
-                        Street = street,
-                        Num = num,
-                        District = district,
-                        Url = "https://www.avito.ru" + page_url
+                        Address = new Address()
+                        {
+                            Street = street,
+                            Num = num,
+                            District = district,
+                        },
+                        PageUrl = "https://www.avito.ru" + page_url,
+                        ImageUrl = url_img
                     };
 
                     if (argumentModel.MaxPrice * 1000 >= apart.Price && argumentModel.MinPrice * 1000 <= apart.Price &&

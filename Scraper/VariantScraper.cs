@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using RieltorApp.Base;
+using RieltorApp.DB;
 using RieltorApp.NewModel;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace RieltorApp.Scraper
 {
     public class VariantScraper : BaseScraper
     {
-        public override async Task<List<ApartmentModel>> GetApartments(SearchArgumentModel argumentModel)
+        public override async Task<List<ApartmentItem>> GetApartments(SearchArgumentModel argumentModel)
         {
-            List<ApartmentModel> apartaments = new List<ApartmentModel>();
+            List<ApartmentItem> apartaments = new List<ApartmentItem>();
 
             var url = "https://variant-nk.ru/object/search/novokuznetsk/kvartiry/prodam?page=1";
 
@@ -58,20 +59,23 @@ namespace RieltorApp.Scraper
                     string num = address[2];
 
                     string page_url = root.GetAttributeValue("href", "");
-                    string url_img = variant.SelectSingleNode(".//img[contains(@class, 'img-responsive')]").GetAttributeValue("src", "/RieltorApp;component/Resource/newBg.jpg"); 
-                    
-                    var apart = new ApartmentModel()
+                    string url_img = variant.SelectSingleNode(".//img[contains(@class, 'img-responsive')]").GetAttributeValue("src", "/RieltorApp;component/Resource/newBg.jpg");
+
+                    var apart = new ApartmentItem()
                     {
                         Area = float.Parse(area),
                         RoomCount = int.Parse(roomCount),
                         Floor = int.Parse(floor),
                         Storeys = int.Parse(storeys),
                         Price = int.Parse(price),
-                        Street = street,
-                        Num = num,
-                        District = district,
-                        Url = "https://variant-nk.ru" + page_url,
-                        Url_Img = url_img
+                        Address = new Address()
+                        {
+                            Street = street,
+                            Num = num,
+                            District = district,
+                        },
+                        PageUrl = "https://variant-nk.ru" + page_url,
+                        ImageUrl = url_img
                     };
 
                     if (argumentModel.MaxPrice * 1000 >= apart.Price && argumentModel.MinPrice * 1000 <= apart.Price &&
@@ -87,11 +91,6 @@ namespace RieltorApp.Scraper
                 }
             }
             return apartaments;
-        }
-
-        public override List<ApartmentModel> GetSyncApartments(SearchArgumentModel argumentModel)
-        {
-            throw new NotImplementedException();
         }
     }
 }

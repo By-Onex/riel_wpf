@@ -6,26 +6,25 @@
         xmlns:local="clr-namespace:RieltorApp.NewView"
         xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
         mc:Ignorable="d"
-        Title="PHouse" Height="450" Width="800">
-    <Grid DataContext="{x:Static viewModel:MainViewModel.Instance}">
+        Title="PHouse" Width="800" Height="450" WindowStyle="SingleBorderWindow">
+    <Grid DataContext="{x:Static viewModel:MainViewModel.Instance}" Background="#FFFB0000" Height="420">
         <Grid.RowDefinitions>
             <RowDefinition Height="420"/>
         </Grid.RowDefinitions>
-        <Image Source="newBg.jpg" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"></Image>
-        <Grid Grid.Row="0" >
+        <Image Source="newBg.jpg" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Height="420"></Image>
+        <Grid Grid.Row="0"  >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <DockPanel Height="420" Grid.Row="0" x:Name="UpperPanel" >
+            <DockPanel Height="420" Grid.Row="0" x:Name="UpperPanel" Margin="-450,0">
                 <Border MinWidth="500"  CornerRadius="4" Background="#99FFFFFF" BorderBrush="White" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel  >
                         <TextBlock TextWrapping="Wrap" FontFamily="Malgun Gothic" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,20,0,0" Padding="0" Text="{Binding PageStateText}"></TextBlock>
                         <ContentControl Content="{ Binding PageContent }" />
                     </StackPanel>
                 </Border>
-
                 <DockPanel.Style>
                     <Style>
                         <Style.Triggers>
@@ -58,7 +57,7 @@
                 </DockPanel.Style>
             </DockPanel>
 
-            <local:ResultView Grid.Row="1"  Margin="0" Height="411"/>
+            <local:ResultView Grid.Row="1"  Margin="0"/>
         </Grid>
 
 

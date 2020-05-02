@@ -5,6 +5,7 @@ using RieltorApp.DB;
 using RieltorApp.NewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,8 +18,8 @@ namespace RieltorApp.Scraper
         public override async Task<List<ApartmentItem>> GetApartments(SearchArgumentModel argumentModel)
         {
             List<ApartmentItem> apartaments = new List<ApartmentItem>();
-
-            var url = "https://www.avito.ru/novokuznetsk/kvartiry?cd=1";
+            Console.WriteLine(argumentModel.District);
+            var url = argumentModel.SearchType == SearchType.Buy ? "https://www.avito.ru/novokuznetsk/kvartiry/prodam-ASgBAgICAUSSA8YQ" : "https://www.avito.ru/novokuznetsk/kvartiry/sdam-ASgBAgICAUSSA8gQ";
 
             var httpClient = new HttpClient();
             string html = await httpClient.GetStringAsync(url);
@@ -50,21 +51,24 @@ namespace RieltorApp.Scraper
                     string[] address = variant.SelectSingleNode(".//span[contains(@class, 'item-address__string')]").InnerText.Trim().Split(',');
 
                     if (address.Length < 2) continue;
-                    string street = address[address.Length - 2];
+
+                    var street_vel = address[address.Length - 2].Split(' ');
+                    if (street_vel.Length == 0) continue;
+                    string street = string.Join(" ", street_vel.Where(v => v != null && v.Length > 0 && v[0].ToString().ToUpper() == v[0].ToString()));
                     string num = address[address.Length - 1];
 
                     if (variant.SelectSingleNode(".//span[contains(@class, 'item-address-georeferences')]") == null)
                         continue;
-                    string district = variant.SelectSingleNode(".//span[contains(@class, 'item-address-georeferences')]").InnerText.Trim();
+
+                    var district_vel = variant.SelectSingleNode(".//span[contains(@class, 'item-address-georeferences')]").InnerText.Trim().Split(' ');
+                    string district = string.Join(" ", district_vel.Where(v => v[0].ToString().ToUpper() == v[0].ToString()));
 
                     string page_url = variant.SelectSingleNode(".//a[contains(@class, 'snippet-link')]").GetAttributeValue("href", "");
 
                     var img_src = variant.SelectSingleNode(".//img[contains(@class, 'large-picture-img')]");
-                    
+
                     string url_img = img_src == null ? "/RieltorApp;component/Resource/newBg.jpg" : img_src.GetAttributeValue("src", "/RieltorApp;component/Resource/newBg.jpg");
 
-
-                    
                     var apart = new ApartmentItem()
                     {
                         Area = float.Parse(area),
@@ -84,7 +88,9 @@ namespace RieltorApp.Scraper
 
                     if (argumentModel.MaxPrice * 1000 >= apart.Price && argumentModel.MinPrice * 1000 <= apart.Price &&
                         argumentModel.MaxFloor >= apart.Floor && argumentModel.MinFloor <= apart.Floor &&
-                        argumentModel.MaxStoreys >= apart.Storeys && argumentModel.MinStoreys <= apart.Storeys)
+                        argumentModel.MaxStoreys >= apart.Storeys && argumentModel.MinStoreys <= apart.Storeys &&
+                        (argumentModel.District == "Любой" || apart.Address.District.Contains(argumentModel.District) || apart.Address.District.Equals(argumentModel.District)) &&
+                        (argumentModel.RoomCount == RoomCount.Any || (argumentModel.RoomCount == RoomCount.Many && apart.RoomCount >= 4) || (int)argumentModel.RoomCount == apart.RoomCount))
                         apartaments.Add(apart);
                 }
                 catch (Exception ex)

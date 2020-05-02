@@ -27,9 +27,20 @@ namespace RieltorApp.DB
             return db.GetCollection<ApartmentItem>("FavoriteApartment").FindAll().ToList();
         }
 
-        public static void Insert<T>(T item, string collectionName)
+        public static void Insert<T>(T item, DBTable collectionName)
         {
-            db.GetCollection<T>(collectionName).Insert(item);
+            db.GetCollection<T>(collectionName.ToString()).Insert(item);
         }
+
+        public static void Delete<T>(BsonValue id, DBTable collectionName)
+        {
+            db.GetCollection<T>(collectionName.ToString()).Delete(id);
+        }
+
+        public static List<T> GetCollectionList<T>(DBTable collectionName)
+        {
+            return db.GetCollection<T>(collectionName.ToString()).FindAll().ToList();
+        }
+
     }
 }

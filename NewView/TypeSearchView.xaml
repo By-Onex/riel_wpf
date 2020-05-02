@@ -13,10 +13,10 @@
     </UserControl.Resources>
     <StackPanel DataContext="{StaticResource TypeSearchViewModel}" Style="{StaticResource Def_StackPanel}">
 
-        <Button Style="{StaticResource Def_Button}" Command="{Binding Path=OpenPage}" CommandParameter="{x:Type local:SearchView}" Margin="0,0,10,0">
+        <Button Style="{StaticResource Def_Button}" Command="{Binding Path=OpenPageSearch}" CommandParameter="Buy" Margin="0,0,10,0">
             <TextBlock TextWrapping="Wrap">Покупка</TextBlock>
         </Button>
-        <Button Style="{StaticResource Def_Button}" Margin="0,0,10,0">
+        <Button Style="{StaticResource Def_Button}" Command="{Binding Path=OpenPageSearch}" CommandParameter="Arenda" Margin="0,0,10,0">
             <TextBlock TextWrapping="Wrap">Аренда</TextBlock>
         </Button>
     </StackPanel>

@@ -15,14 +15,25 @@ namespace RieltorApp.NewModel
         Buy,
         Arenda
     }
+
+    public enum RoomCount
+    {
+        One = 1,
+        Two = 2,
+        Three = 3,
+        Many = 4,
+        Any = -1
+    }
     public class SearchArgumentModel
     {
         public SearchType SearchType = SearchType.Buy;
-        public int MinPrice, MaxPrice;
-        public int MinArea, MaxArea;
-        public int MinFloor, MaxFloor;
-        public int MinStoreys, MaxStoreys;
-        public int RoomCount;
+        public int MinPrice = 0, MaxPrice = 10000;
+        public int MinArea = 0, MaxArea = 100;
+        public int MinFloor= 0, MaxFloor = 10;
+        public int MinStoreys = 0, MaxStoreys = 10;
+        public string District = "Любой";
+
+        public RoomCount RoomCount = RoomCount.Any;
 
         private List<BaseScraper> _scrapers;
 

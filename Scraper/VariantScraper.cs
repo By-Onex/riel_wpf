@@ -4,6 +4,7 @@ using RieltorApp.DB;
 using RieltorApp.NewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -16,14 +17,13 @@ namespace RieltorApp.Scraper
         {
             List<ApartmentItem> apartaments = new List<ApartmentItem>();
 
-            var url = "https://variant-nk.ru/object/search/novokuznetsk/kvartiry/prodam?page=1";
+            var url = argumentModel.SearchType == SearchType.Buy? "https://variant-nk.ru/object/search/novokuznetsk/kvartiry/prodam?page=1" : "https://variant-nk.ru/object/search/novokuznetsk/kvartiry/arenda?page=1";
 
             var httpClient = new HttpClient();
             string html = await httpClient.GetStringAsync(url);
 
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(html);
-
 
             var all_variants = document.DocumentNode.SelectNodes("//article[contains(@class, 'object-list')]");
             foreach (var variant in all_variants)
@@ -54,7 +54,10 @@ namespace RieltorApp.Scraper
                     string[] address = root.SelectSingleNode("./h5").InnerText.Trim().Split(',');
 
                     if (address.Length != 3) continue;
-                    string district = address[0];
+
+                    var district_vel = address[0].Trim().Split(' ');
+                    string district = string.Join(" ", district_vel.Where(v => v[0].ToString().ToUpper() == v[0].ToString()));
+
                     string street = address[1];
                     string num = address[2];
 
@@ -80,7 +83,9 @@ namespace RieltorApp.Scraper
 
                     if (argumentModel.MaxPrice * 1000 >= apart.Price && argumentModel.MinPrice * 1000 <= apart.Price &&
                         argumentModel.MaxFloor >= apart.Floor && argumentModel.MinFloor <= apart.Floor &&
-                        argumentModel.MaxStoreys >= apart.Storeys && argumentModel.MinStoreys <= apart.Storeys)
+                        argumentModel.MaxStoreys >= apart.Storeys && argumentModel.MinStoreys <= apart.Storeys &&
+                        (argumentModel.District == "Любой" || apart.Address.District.Contains(argumentModel.District)) &&
+                        (argumentModel.RoomCount == RoomCount.Any || (argumentModel.RoomCount == RoomCount.Many && apart.RoomCount >= 4) || (int)argumentModel.RoomCount == apart.RoomCount))
                         apartaments.Add(apart);
                 }
 

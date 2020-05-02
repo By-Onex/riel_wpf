@@ -6,13 +6,14 @@ namespace RieltorApp.NewViewModel
 {
     public class TypeSearchViewModel : BaseViewModel
     {
-        public ICommand OpenPage { get; set; }
+        public ICommand OpenPageSearch { get; set; }
 
         public TypeSearchViewModel()
         {
-            OpenPage = new BaseCommand((nextPage) =>
+            OpenPageSearch = new BaseCommand((st) =>
             {
-                MainViewModel.Instance.ChangePage(((UserControl)Activator.CreateInstance((Type)nextPage)).Content, "Заполните необходимые критерии");
+                MainViewModel.Instance.SearchArgumentModel.SearchType = (string)st == "Buy"  ? NewModel.SearchType.Buy : NewModel.SearchType.Arenda;
+                MainViewModel.Instance.ChangePage(((UserControl)Activator.CreateInstance(typeof(NewView.SearchView))).Content, "Заполните необходимые критерии");
             });
         }
     }

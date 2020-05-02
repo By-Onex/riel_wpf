@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="330" d:DesignWidth="200" Margin="10,10,10,10">
     <StackPanel >
-        <Label Style="{StaticResource Def_Label}" Content="{Binding Address.District}" HorizontalAlignment="Center" Padding="3"/>
+        <Label Style="{StaticResource Def_Label}" Content="{Binding Address.DistrictInfo}" HorizontalAlignment="Center" Padding="3"/>
         <Label Style="{StaticResource Def_Label}" Content="{Binding Address.Info}" HorizontalAlignment="Center"  Padding="3"/>
         <Label Style="{StaticResource Def_Label}" Content="{Binding Info}" HorizontalAlignment="Center"  Padding="3"/>
         <Label Style="{StaticResource Def_Label}" Content="{Binding PriceInfo}" HorizontalAlignment="Center"  Padding="3,3,3,5"/>
         <Image Width="200" Height="120" Source="{Binding ImageUrl}" Stretch="UniformToFill" HorizontalAlignment="Center" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0" Command="{Binding ElementName=ResultList, Path=DataContext.AddFavorite}" CommandParameter="{Binding}">В избранное</Button>
+            <Button Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0" Command="{Binding ElementName=ResultList, Path=DataContext.AddFavorite}" CommandParameter="{Binding}" Content="{Binding ButtonText}"/>
             <Button Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,15,0,0" Command="{Binding ElementName=ResultList, Path=DataContext.OpenWebPage}" CommandParameter="{Binding PageUrl}">Открыть</Button>
         </StackPanel>
         

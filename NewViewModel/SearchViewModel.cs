@@ -1,6 +1,8 @@
 ﻿using RieltorApp.NewModel;
 using RieltorApp.Scraper;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace RieltorApp.NewViewModel
@@ -9,29 +11,29 @@ namespace RieltorApp.NewViewModel
     {
         private SearchArgumentModel _searchModel;
         public ICommand SearchCommand { get; set; }
-
-        private string _district;
+        public ICommand OpenPage { get; set; }
         public string District
         {
-            get => _district;
+            get => _searchModel.District;
             set
             {
-                if (_district != value)
+                if (_searchModel.District != value)
                 {
-                    _district = value;
+                    _searchModel.District = value;
                     NotifyPropertyChanged();
                 }
             }
         }
-        private string _roomCount;
         public string RoomCount
         {
-            get => _roomCount;
+            get => ConvertToText(_searchModel.RoomCount);
             set
             {
-                if (_roomCount != value)
+                RoomCount val = ConvertToRoomCount(value);
+               
+                if (_searchModel.RoomCount != val)
                 {
-                    _roomCount = value;
+                    _searchModel.RoomCount = val;
                     NotifyPropertyChanged();
                 }
             }
@@ -136,6 +138,41 @@ namespace RieltorApp.NewViewModel
                 ResultViewModel.Instance.ShowResult = Visibility.Hidden;
                 _searchModel.GetAparts();
             });
+
+            OpenPage = new BaseCommand((nextPage) =>
+            {
+                MainViewModel.Instance.ChangePage(((UserControl)Activator.CreateInstance((Type)nextPage)).Content, "С чем работать?");
+            });
+        }
+
+        private string ConvertToText(RoomCount rc)
+        {
+            switch (rc)
+            {
+                case NewModel.RoomCount.One:
+                case NewModel.RoomCount.Two:
+                case NewModel.RoomCount.Three:
+                    return ((int)NewModel.RoomCount.Three).ToString();
+                case NewModel.RoomCount.Many:
+                    return "4+";
+                default:
+                    return "Любое";
+            }
+        }
+
+        private RoomCount ConvertToRoomCount(string value)
+        {
+            switch (value)
+            {
+                case "1":
+                case "2":
+                case "3":
+                    return (RoomCount)int.Parse(value);
+                case "4+":
+                    return NewModel.RoomCount.Many;
+                default:
+                    return NewModel.RoomCount.Any;
+            }
         }
     }
 }

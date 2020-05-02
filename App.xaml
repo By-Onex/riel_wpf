@@ -201,12 +201,16 @@
         </Style>
 
         <!-- New Disain -->
-        <Color x:Key="cGrayPink">#E8C8BC</Color>
-        <SolidColorBrush x:Key="GrayPink" Color="#E8C8BC" />
+        <!--<Color x:Key="cGrayPink">#E8C8BC</Color>-->
+        <!--<SolidColorBrush x:Key="GrayPink" Color="#E8C8BC" />-->
+        <Color x:Key="cGrayPink">#FF3D8AE6</Color>
+        <SolidColorBrush x:Key="GrayPink" Color="#FF3D8AE6"/>
         <SolidColorBrush x:Key="DarkGray" Color="#3B3A3D" />
         <SolidColorBrush x:Key="LightGray" Color="#706F74" />
         <SolidColorBrush x:Key="White" Color="#FFFFFF" />
-        
+
+        <SolidColorBrush x:Key="BtnBack" Color="#7F3D8AE6"/>
+
         <FontFamily x:Key="MalgunFont">Malgun Gothic</FontFamily>
 
         <Style x:Key="Def_StackPanel" TargetType="{x:Type StackPanel}">
@@ -235,6 +239,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Background" TargetName="ButtonBorder" Value="{StaticResource BtnBack}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="BorderBrush" TargetName="ButtonBorder"  Value="Black" />
@@ -384,7 +389,7 @@
                                 <Grid Name="DropDown" SnapsToDevicePixels="True"
                     MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
                     MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
-                                    <Border Name="DropDownBorder" Background="#99FFFFFF" Margin="0, 1, 0, 0"
+                                    <Border Name="DropDownBorder" Background="#CCFFFFFF" Margin="0, 1, 0, 0"
                         CornerRadius="0" BorderThickness="1,1,1,1" 
                         BorderBrush="{StaticResource ComboBoxNormalBorderBrush}"/>
                                     <ScrollViewer Margin="4" SnapsToDevicePixels="True">

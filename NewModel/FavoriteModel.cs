@@ -13,8 +13,8 @@ namespace RieltorApp.NewModel
     {
         public static async void GetAparts()
         {
-            var aparts = await Task.Run(() => { return DataBase.GetFavoriteApartment(); });
-
+            var aparts = await Task.Run(() => { return DataBase.GetCollectionList<ApartmentItem>(DBTable.FavoriteApartment); });
+            aparts.ForEach(a => a.IsFavorite = true);
             ResultViewModel.Instance.Items = aparts;
 
             ResultViewModel.Instance.ShowAnimation = Visibility.Hidden;
@@ -29,7 +29,16 @@ namespace RieltorApp.NewModel
 
         public static void AddFavorite(ApartmentItem apartment)
         {
-            DataBase.Insert(apartment, DBTable.FavoriteApartment.ToString());
+            if (apartment.IsFavorite)
+            {
+                DataBase.Delete<ApartmentItem>(apartment.Id, DBTable.FavoriteApartment);
+                apartment.IsFavorite = false;
+            }
+            else
+            {
+                DataBase.Insert(apartment, DBTable.FavoriteApartment);
+                apartment.IsFavorite = true;
+            }
         }
     }
 }

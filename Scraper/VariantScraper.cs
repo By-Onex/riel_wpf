@@ -57,7 +57,7 @@ namespace RieltorApp.Scraper
 
                     var district_vel = address[0].Trim().Split(' ');
                     string district = string.Join(" ", district_vel.Where(v => v[0].ToString().ToUpper() == v[0].ToString()));
-
+                    if (district == "Бл.Куйбышево") district = "Куйбышевский";
                     string street = address[1];
                     string num = address[2];
 

@@ -6,19 +6,34 @@
              xmlns:local="clr-namespace:RieltorApp.NewView"
              xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
              mc:Ignorable="d" 
-             d:DesignWidth="800" Height="411">
+             d:DesignWidth="800">
 
     <Grid Background="White" DataContext="{x:Static viewModel:ResultViewModel.Instance }" >
 
         <local:AnimationCircle Visibility="{Binding ShowAnimation }"/>
         <Label Visibility="{Binding ShowStatus }" Foreground="{StaticResource GrayPink}" FontWeight="Bold"  FontFamily="{StaticResource MalgunFont}" FontSize="22" Content="По вашему запросу ничего не найдено" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ItemsControl x:Name="ResultList" Margin="20,0,0,0"  Style="{StaticResource Def_IC}" ItemsSource="{Binding Items}" Visibility="{Binding ShowResult}" Grid.Column="0" >
+
+        <StackPanel Margin="50,0,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <GroupBox Header="Сортировка" Style="{StaticResource Def_GroupBox}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <ComboBox Text="Сортировка" Margin="5,5,5,5" Width="130" Style="{StaticResource ComboBoxFlatStyle}" IsReadOnly="True"  VerticalAlignment="Bottom" HorizontalAlignment="Center" SelectedValue="{Binding District}" SelectedValuePath="Content">
+                    <ComboBoxItem>Цена ↑</ComboBoxItem>
+                    <ComboBoxItem>Цена ↓</ComboBoxItem>
+                    <ComboBoxItem>Комнаты ↑</ComboBoxItem>
+                    <ComboBoxItem>Комнаты ↓</ComboBoxItem>
+                </ComboBox>
+            </GroupBox>
+            <GroupBox Header="Текстовый поиск" Style="{StaticResource Def_GroupBox}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBox Style="{StaticResource Def_TextBox}" Text="Test" VerticalAlignment="Center" MaxWidth="110" Margin="0,9,0,0" />
+            </GroupBox>
+        </StackPanel>
+        <ItemsControl x:Name="ResultList" Margin="30,60,15,7"  Style="{StaticResource Def_IC}" ItemsSource="{Binding Items}" Visibility="{Binding ShowResult}"  >
             <!---->
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <local:ApartmentItemView/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+
         </ItemsControl>
 
         <Label Margin="-15,50" Foreground="{StaticResource GrayPink}" FontFamily="{StaticResource MalgunFont}" FontSize="14" Content="Вернуться" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">

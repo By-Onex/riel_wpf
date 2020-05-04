@@ -22,6 +22,29 @@ namespace RieltorApp.NewViewModel
             get => _pageContent;
         }
         private string _pageStateText;
+
+        private int _heightGrid = 420;
+        public int HeightGrid
+        {
+            set
+            {
+                _heightGrid = value;
+                NotifyPropertyChanged("HeightGrid");
+            }
+            get => _heightGrid;
+        }
+
+        private int _widthGrid = 800;
+        public int WidthGrid
+        {
+            set
+            {
+                _widthGrid = value;
+                NotifyPropertyChanged("WidthGrid");
+            }
+            get => _widthGrid;
+        }
+
         public string PageStateText
         {
             get => _pageStateText;
@@ -46,32 +69,6 @@ namespace RieltorApp.NewViewModel
         {
             PageContent = contetPage;
             PageStateText = newTitle;
-        }
-
-
-        private bool _goBottom;
-        public bool GoBottom
-        {
-            get => _goBottom;
-            set
-            {
-                if (value) GoTop = false;
-                _goBottom = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private bool _goTop;
-        public bool GoTop
-        {
-            get => _goTop;
-            set
-            {
-
-                if (value) GoBottom = false;
-                _goTop = value;
-                NotifyPropertyChanged();
-            }
         }
     }
 }

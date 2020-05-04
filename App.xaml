@@ -5,6 +5,8 @@
              StartupUri="NewView/MainView.xaml">
     <Application.Resources>
 
+        <Thickness x:Key="Dynamic.ThicknessAnimation.Margin">0, -420, 0, 0</Thickness>
+        
         <FontFamily x:Key="fntPrimary">Verdana</FontFamily>
         <SolidColorBrush x:Key="clrPrimary" Color="#00AF64" />
         <SolidColorBrush x:Key="clrTextPrimary" Color="White" />
@@ -209,6 +211,8 @@
         <SolidColorBrush x:Key="LightGray" Color="#706F74" />
         <SolidColorBrush x:Key="White" Color="#FFFFFF" />
 
+        <SolidColorBrush x:Key="DelColor" Color="#E5DA1B1B" />
+
         <SolidColorBrush x:Key="BtnBack" Color="#7F3D8AE6"/>
 
         <FontFamily x:Key="MalgunFont">Malgun Gothic</FontFamily>
@@ -288,6 +292,20 @@
         <Style x:Key="Def_Label" TargetType="{x:Type Label}">
             <Setter Property="FontFamily" Value="{StaticResource MalgunFont}"/>
             <Setter Property="Foreground" Value="{StaticResource DarkGray}" />
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="Del_Label" TargetType="{x:Type Label}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="{StaticResource MalgunFont}"/>
+            <Setter Property="Foreground" Value="{StaticResource DelColor}" />
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="Prim_Label" TargetType="{x:Type Label}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="{StaticResource MalgunFont}"/>
+            <Setter Property="Foreground" Value="{StaticResource GrayPink}" />
             <Setter Property="FontSize" Value="14"/>
         </Style>
 
@@ -431,7 +449,7 @@
                     <ControlTemplate TargetType="ItemsControl">
                         <Border Background="White">
                             <ScrollViewer Margin="0">
-                                <WrapPanel Margin="0"  IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                                <WrapPanel Margin="0"  IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Left"/>
                             </ScrollViewer>
                         </Border>
                     </ControlTemplate>

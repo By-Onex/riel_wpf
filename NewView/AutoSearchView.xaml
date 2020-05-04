@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="RieltorApp.NewView.AutoSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RieltorApp.NewView"
+             xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid DataContext="{x:Static viewModel:AutoSearchViewModel.Instance}" Background="White">
+        
+        <ItemsControl Style="{StaticResource Def_IC}" Margin="20,20,0,85" ItemsSource="{Binding Items}" >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:AutoSearchItem/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Label Visibility="{Binding ShowStatus }" Foreground="{StaticResource GrayPink}" FontWeight="Bold"  FontFamily="{StaticResource MalgunFont}" FontSize="22" Content="Здесь ничего нет" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+            <Button Width="100" Margin="0,0,20,0" Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding Path=BackToMain}" CommandParameter="Null">
+                <TextBlock TextWrapping="Wrap">Добавить</TextBlock>
+            </Button>
+            <Button Width="100" Margin="0" Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding Path=BackToMain}" CommandParameter="Null">
+                <TextBlock TextWrapping="Wrap">Вернуться</TextBlock>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -6,60 +6,37 @@
         xmlns:local="clr-namespace:RieltorApp.NewView"
         xmlns:viewModel="clr-namespace:RieltorApp.NewViewModel"
         mc:Ignorable="d"
-        Title="PHouse" Width="800" Height="450" WindowStyle="SingleBorderWindow">
-    <Grid DataContext="{x:Static viewModel:MainViewModel.Instance}" Background="#FFFB0000" Height="420">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="420"/>
-        </Grid.RowDefinitions>
-        <Image Source="newBg.jpg" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Height="420"></Image>
-        <Grid Grid.Row="0"  >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
+        Title="PHouse" Width="800" Height="450" WindowStyle="SingleBorderWindow" SizeChanged="Window_SizeChanged" MinWidth="560" MinHeight="450" >
 
-            <DockPanel Height="420" Grid.Row="0" x:Name="UpperPanel" Margin="-450,0">
+    <Grid DataContext="{x:Static viewModel:MainViewModel.Instance}" Background="Red" Height="{Binding HeightGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding HeightGrid}"/>
+        </Grid.RowDefinitions>
+        <Image Source="newBg.jpg" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"></Image>
+
+        <Grid Grid.Row="0"  x:Name="AnimGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{Binding HeightGrid}"></RowDefinition>
+                <RowDefinition Height="{Binding HeightGrid}"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding WidthGrid}"/>
+                <ColumnDefinition Width="{Binding WidthGrid}"/>
+            </Grid.ColumnDefinitions>
+            
+            <DockPanel Grid.Row="0">
                 <Border MinWidth="500"  CornerRadius="4" Background="#99FFFFFF" BorderBrush="White" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel  >
                         <TextBlock TextWrapping="Wrap" FontFamily="Malgun Gothic" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,20,0,0" Padding="0" Text="{Binding PageStateText}"></TextBlock>
                         <ContentControl Content="{ Binding PageContent }" />
                     </StackPanel>
                 </Border>
-                <DockPanel.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding GoBottom}" Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard x:Name="GoBottomAnimation">
-                                        <Storyboard>
-                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,-420,0,0" Duration="0:0:0.5"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="GoBottomAnimation" />
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding GoTop}" Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard x:Name="GoTopAnimation">
-                                        <Storyboard>
-                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,0,0,0" Duration="0:0:0.5"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="GoTopAnimation" />
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DockPanel.Style>
             </DockPanel>
+            <local:ResultView Grid.Row="1"  Grid.Column="0" Height="{Binding HeightGrid}"/>
 
-            <local:ResultView Grid.Row="1"  Margin="0"/>
+            <local:AutoSearchView Grid.Row="0" Grid.Column="1"/>
         </Grid>
-
 
     </Grid>
 </Window>

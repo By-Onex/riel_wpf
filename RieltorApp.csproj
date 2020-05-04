@@ -87,11 +87,13 @@
     <Compile Include="Base\BaseCommand.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="DB\ApartmentItem.cs" />
+    <Compile Include="DB\AutoSearchItem.cs" />
     <Compile Include="DB\DataBase.cs" />
     <Compile Include="DesigndViewModel\ItemViewModel.cs" />
     <Compile Include="NewModel\ApartmentModel.cs" />
     <Compile Include="NewModel\FavoriteModel.cs" />
     <Compile Include="NewModel\SearchArgumentModel.cs" />
+    <Compile Include="NewViewModel\AutoSearchViewModel.cs" />
     <Compile Include="NewViewModel\MainViewModel.cs" />
     <Compile Include="NewViewModel\ResultViewModel.cs" />
     <Compile Include="NewViewModel\SearchViewModel.cs" />
@@ -99,6 +101,12 @@
     <Compile Include="NewViewModel\TypeSearchViewModel.cs" />
     <Compile Include="NewView\AnimationCircle.xaml.cs">
       <DependentUpon>AnimationCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\AutoSearchItem.xaml.cs">
+      <DependentUpon>AutoSearchItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\AutoSearchView.xaml.cs">
+      <DependentUpon>AutoSearchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="NewView\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -122,6 +130,14 @@
     <Compile Include="Base\BaseScraper.cs" />
     <Compile Include="Scraper\VariantScraper.cs" />
     <Page Include="NewView\AnimationCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\AutoSearchItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\AutoSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
 ﻿using RieltorApp.NewModel;
+using RieltorApp.NewView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace RieltorApp.NewViewModel
     public class StartMenuViewModel : BaseViewModel
     {
         public ICommand OpenPage { get; set; }
-        public ICommand FavoritePage { get; set; }
+        public ICommand MovePage { get; set; }
         public StartMenuViewModel()
         {
             OpenPage = new BaseCommand((nextPage) =>
@@ -21,13 +22,19 @@ namespace RieltorApp.NewViewModel
                 MainViewModel.Instance.ChangePage(((UserControl)Activator.CreateInstance((Type)nextPage)).Content, "Выберите тип поиска");
             });
 
-            FavoritePage = new BaseCommand((o) =>
+            MovePage = new BaseCommand((p) =>
             {
-                MainViewModel.Instance.GoBottom = true;
-                ResultViewModel.Instance.ShowAnimation = Visibility.Visible;
-                ResultViewModel.Instance.ShowResult = Visibility.Hidden;
-
-                FavoriteModel.GetAparts();
+                if (p as string == "Favorite")
+                {
+                    MainView.GoBottom();
+                    ResultViewModel.Instance.ShowAnimation = Visibility.Visible;
+                    ResultViewModel.Instance.ShowResult = Visibility.Hidden;
+                    FavoriteModel.GetAparts();
+                }
+                else
+                {
+                    MainView.GoRight();
+                }
             });
         }
     }

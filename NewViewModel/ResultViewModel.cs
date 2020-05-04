@@ -1,5 +1,6 @@
 ﻿using RieltorApp.DB;
 using RieltorApp.NewModel;
+using RieltorApp.NewView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +68,7 @@ namespace RieltorApp.NewViewModel
 
             ReturnToTop = new BaseCommand(o =>
             {
-                MainViewModel.Instance.GoTop = true;
+                MainView.GoTop();
                 ShowResult = Visibility.Hidden;
                 ShowAnimation = Visibility.Hidden;
                 ShowStatus = Visibility.Hidden;

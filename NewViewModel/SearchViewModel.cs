@@ -1,4 +1,5 @@
 ﻿using RieltorApp.NewModel;
+using RieltorApp.NewView;
 using RieltorApp.Scraper;
 using System;
 using System.Windows;
@@ -133,7 +134,7 @@ namespace RieltorApp.NewViewModel
             _searchModel = MainViewModel.Instance.SearchArgumentModel;
             SearchCommand = new BaseCommand( (o)=>
             {
-                MainViewModel.Instance.GoBottom = true;
+                MainView.GoBottom();
                 ResultViewModel.Instance.ShowAnimation = Visibility.Visible;
                 ResultViewModel.Instance.ShowResult = Visibility.Hidden;
                 _searchModel.GetAparts();
@@ -159,7 +160,6 @@ namespace RieltorApp.NewViewModel
                     return "Любое";
             }
         }
-
         private RoomCount ConvertToRoomCount(string value)
         {
             switch (value)

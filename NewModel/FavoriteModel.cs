@@ -31,7 +31,7 @@ namespace RieltorApp.NewModel
         {
             if (apartment.IsFavorite)
             {
-                DataBase.Delete<ApartmentItem>(apartment.Id, DBTable.FavoriteApartment);
+                DataBase.Delete(apartment.Id, DBTable.FavoriteApartment);
                 apartment.IsFavorite = false;
             }
             else

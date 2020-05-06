@@ -32,11 +32,32 @@ namespace RieltorApp.NewModel
         public int MinFloor= 0, MaxFloor = 10;
         public int MinStoreys = 0, MaxStoreys = 10;
         public string District = "Любой";
-
+        
         public RoomCount RoomCount = RoomCount.Any;
 
+        public string Description = "";
         private List<BaseScraper> _scrapers;
 
+        public int Id;
+        public static SearchArgumentModel Convert(AutoSearchItem item)
+        {
+            var sam = new SearchArgumentModel();
+            sam.Id = item.Id;
+
+            sam.SearchType = item.SearchType;
+            sam.MinPrice = item.MinPrice;
+            sam.MaxPrice = item.MaxPrice;
+            sam.MinArea = item.MinArea;
+            sam.MaxArea = item.MaxArea;
+            sam.MinFloor = item.MinFloor;
+            sam.MaxFloor = item.MaxFloor;
+
+            sam.MinStoreys = item.MinStoreys;
+            sam.MaxStoreys = item.MaxStoreys;
+            sam.District = item.District;
+
+            return sam;
+        }
         public SearchArgumentModel()
         {
             _scrapers = new List<BaseScraper>() { new AvitoScraper(), new VariantScraper() };

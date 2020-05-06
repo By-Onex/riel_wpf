@@ -15,7 +15,7 @@
 
         <StackPanel Margin="50,0,0,0" Orientation="Horizontal" VerticalAlignment="Top">
             <GroupBox Header="Сортировка" Style="{StaticResource Def_GroupBox}" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <ComboBox Text="Сортировка" Margin="5,5,5,5" Width="130" Style="{StaticResource ComboBoxFlatStyle}" IsReadOnly="True"  VerticalAlignment="Bottom" HorizontalAlignment="Center" SelectedValue="{Binding District}" SelectedValuePath="Content">
+                <ComboBox Text="Сортировка" Margin="5,5,5,5" Width="130" Style="{StaticResource ComboBoxFlatStyle}" IsReadOnly="True"  VerticalAlignment="Bottom" HorizontalAlignment="Center" SelectedValue="{Binding Sort}" SelectedValuePath="Content">
                     <ComboBoxItem>Цена ↑</ComboBoxItem>
                     <ComboBoxItem>Цена ↓</ComboBoxItem>
                     <ComboBoxItem>Комнаты ↑</ComboBoxItem>
@@ -23,11 +23,12 @@
                 </ComboBox>
             </GroupBox>
             <GroupBox Header="Текстовый поиск" Style="{StaticResource Def_GroupBox}" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <TextBox Style="{StaticResource Def_TextBox}" Text="Test" VerticalAlignment="Center" MaxWidth="110" Margin="0,9,0,0" />
+                <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" MaxWidth="110" Margin="0,9,0,0" />
             </GroupBox>
         </StackPanel>
-        <ItemsControl x:Name="ResultList" Margin="30,60,15,7"  Style="{StaticResource Def_IC}" ItemsSource="{Binding Items}" Visibility="{Binding ShowResult}"  >
+        <ItemsControl x:Name="ResultList" Margin="30,60,15,7"  Style="{StaticResource Def_IC}" ItemsSource="{Binding Items}" Visibility="{Binding ShowResult}">
             <!---->
+            
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <local:ApartmentItemView/>

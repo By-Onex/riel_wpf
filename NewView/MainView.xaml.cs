@@ -26,24 +26,29 @@ namespace RieltorApp.NewView
         {
             InitializeComponent();
             animGrid = AnimGrid;
+            resultView = resultGridView;
 
-            zero = new Thickness();
-            top = new Thickness(0, -MainViewModel.Instance.HeightGrid, 0, 0);
-            left = new Thickness(-MainViewModel.Instance.WidthGrid, 0, 0, 0);
+            margin = new Thickness();
         }
         private static bool IsTop = true;
         private static bool IsLeft = true;
         private static Grid animGrid;
-        private static Thickness top;
-        private static Thickness left;
-        private static Thickness zero;
+        private static ResultView resultView;
+
+        private static Thickness margin;
+
+        private static int WIDTH = 800;
+        private static int HEIGHT = 450;
+
         public static void GoBottom()
         {
-            ThicknessAnimation animation = new ThicknessAnimation(top, TimeSpan.FromMilliseconds(ANIM_DURATION));
+            margin.Top -= HEIGHT;
+
+            ThicknessAnimation animation = new ThicknessAnimation(margin, TimeSpan.FromMilliseconds(ANIM_DURATION));
             animation.Completed += (o, e) =>
             {
                 animGrid.BeginAnimation(Grid.MarginProperty, null);
-                animGrid.Margin = top;
+                animGrid.Margin = margin;
             };
             animGrid.BeginAnimation(Grid.MarginProperty, animation);
             IsTop = false;
@@ -51,44 +56,49 @@ namespace RieltorApp.NewView
 
         public static void GoTop()
         {
-            ThicknessAnimation animation = new ThicknessAnimation(zero, TimeSpan.FromMilliseconds(ANIM_DURATION));
+            margin.Top += HEIGHT;
+
+            ThicknessAnimation animation = new ThicknessAnimation(margin, TimeSpan.FromMilliseconds(ANIM_DURATION));
            
             animGrid.BeginAnimation(Grid.MarginProperty, animation);
             IsTop = true;
         }
-
         public static void GoRight()
         {
-            ThicknessAnimation animation = new ThicknessAnimation(left, TimeSpan.FromMilliseconds(ANIM_DURATION));
+            margin.Left -= WIDTH;
+            ThicknessAnimation animation = new ThicknessAnimation(margin, TimeSpan.FromMilliseconds(ANIM_DURATION));
             animation.Completed += (o, e) =>
             {
                 animGrid.BeginAnimation(Grid.MarginProperty, null);
-                animGrid.Margin = left;
+                animGrid.Margin = margin;
             };
+
             animGrid.BeginAnimation(Grid.MarginProperty, animation);
             IsLeft = false;
-        }
 
+            resultView.SetValue(Grid.ColumnProperty, 1);
+
+        }
         public static void GoLeft()
         {
-            ThicknessAnimation animation = new ThicknessAnimation(zero, TimeSpan.FromMilliseconds(ANIM_DURATION));
+            margin.Left += WIDTH;
+            ThicknessAnimation animation = new ThicknessAnimation(margin, TimeSpan.FromMilliseconds(ANIM_DURATION));
 
             animGrid.BeginAnimation(Grid.MarginProperty, animation);
             IsLeft = true;
+
+            resultView.SetValue(Grid.ColumnProperty, 0);
         }
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            MainViewModel.Instance.HeightGrid = (int)e.NewSize.Height - 30;
-            MainViewModel.Instance.WidthGrid = (int)e.NewSize.Width;
-            top.Top = -MainViewModel.Instance.HeightGrid;
-            left.Left = -MainViewModel.Instance.WidthGrid;
-            if (!IsTop)
+            MainViewModel.Instance.WidthGrid = WIDTH = (int)e.NewSize.Width;
+            MainViewModel.Instance.HeightGrid = HEIGHT = (int)e.NewSize.Height - 30;
+
+            if (!IsTop || !IsLeft)
             {
-                animGrid.Margin = top;
-            }
-            if (!IsLeft)
-            {
-                animGrid.Margin = left;
+                margin.Top = margin.Top != 0 ? -HEIGHT : 0;
+                margin.Left = margin.Left != 0 ? -WIDTH : 0;
+                animGrid.Margin = margin;
             }
         }
     }

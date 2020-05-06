@@ -10,7 +10,7 @@ namespace RieltorApp.NewViewModel
 {
     public class SearchViewModel : BaseViewModel
     {
-        private SearchArgumentModel _searchModel;
+        public SearchArgumentModel _searchModel { get; private set; }
         public ICommand SearchCommand { get; set; }
         public ICommand OpenPage { get; set; }
         public string District
@@ -123,6 +123,19 @@ namespace RieltorApp.NewViewModel
                 NotifyPropertyChanged();
             }
         }
+        public string Description
+        {
+            get => _searchModel.Description;
+            set
+            {
+                _searchModel.Description = value;
+                NotifyPropertyChanged("Description");
+            }
+        }
+
+        private string _buttonText = "Добавить";
+        public string ButtonText { get => _buttonText; set { _buttonText = value; NotifyPropertyChanged("ButtonText"); } }
+
         private int CheckValue(string val)
         {
             int num;
@@ -131,12 +144,13 @@ namespace RieltorApp.NewViewModel
         }
         public SearchViewModel()
         {
-            _searchModel = MainViewModel.Instance.SearchArgumentModel;
+            _searchModel = new SearchArgumentModel();//MainViewModel.Instance.SearchArgumentModel;
             SearchCommand = new BaseCommand( (o)=>
             {
                 MainView.GoBottom();
                 ResultViewModel.Instance.ShowAnimation = Visibility.Visible;
                 ResultViewModel.Instance.ShowResult = Visibility.Hidden;
+                _searchModel.SearchType = MainViewModel.Instance.SearchArgumentModel.SearchType;
                 _searchModel.GetAparts();
             });
 
@@ -146,14 +160,14 @@ namespace RieltorApp.NewViewModel
             });
         }
 
-        private string ConvertToText(RoomCount rc)
+        public string ConvertToText(RoomCount rc)
         {
             switch (rc)
             {
                 case NewModel.RoomCount.One:
                 case NewModel.RoomCount.Two:
                 case NewModel.RoomCount.Three:
-                    return ((int)NewModel.RoomCount.Three).ToString();
+                    return ((int)rc).ToString();
                 case NewModel.RoomCount.Many:
                     return "4+";
                 default:

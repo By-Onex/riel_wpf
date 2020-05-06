@@ -19,12 +19,12 @@
                 <RowDefinition Height="{Binding HeightGrid}"></RowDefinition>
                 <RowDefinition Height="{Binding HeightGrid}"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding WidthGrid}"/>
                 <ColumnDefinition Width="{Binding WidthGrid}"/>
             </Grid.ColumnDefinitions>
-            
+
             <DockPanel Grid.Row="0">
                 <Border MinWidth="500"  CornerRadius="4" Background="#99FFFFFF" BorderBrush="White" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel  >
@@ -33,10 +33,8 @@
                     </StackPanel>
                 </Border>
             </DockPanel>
-            <local:ResultView Grid.Row="1"  Grid.Column="0" Height="{Binding HeightGrid}"/>
-
+            <local:ResultView x:Name="resultGridView" Grid.Row="1"  Grid.Column="0" Height="{Binding HeightGrid}"/>
             <local:AutoSearchView Grid.Row="0" Grid.Column="1"/>
         </Grid>
-
     </Grid>
 </Window>

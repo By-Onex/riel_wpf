@@ -89,8 +89,10 @@
     <Compile Include="DB\ApartmentItem.cs" />
     <Compile Include="DB\AutoSearchItem.cs" />
     <Compile Include="DB\DataBase.cs" />
+    <Compile Include="DB\FoundApartment.cs" />
     <Compile Include="DesigndViewModel\ItemViewModel.cs" />
     <Compile Include="NewModel\ApartmentModel.cs" />
+    <Compile Include="NewModel\AutoSearchModel.cs" />
     <Compile Include="NewModel\FavoriteModel.cs" />
     <Compile Include="NewModel\SearchArgumentModel.cs" />
     <Compile Include="NewViewModel\AutoSearchViewModel.cs" />
@@ -101,6 +103,9 @@
     <Compile Include="NewViewModel\TypeSearchViewModel.cs" />
     <Compile Include="NewView\AnimationCircle.xaml.cs">
       <DependentUpon>AnimationCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewView\AutoSearchFormView.xaml.cs">
+      <DependentUpon>AutoSearchFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="NewView\AutoSearchItem.xaml.cs">
       <DependentUpon>AutoSearchItem.xaml</DependentUpon>
@@ -130,6 +135,10 @@
     <Compile Include="Base\BaseScraper.cs" />
     <Compile Include="Scraper\VariantScraper.cs" />
     <Page Include="NewView\AnimationCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewView\AutoSearchFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

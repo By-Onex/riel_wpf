@@ -14,13 +14,14 @@ namespace RieltorApp.NewViewModel
     public class ResultViewModel : BaseViewModel
     {
         public static ResultViewModel Instance { get; } = new ResultViewModel();
-        public List<ApartmentItem> _items;
+        private List<ApartmentItem> _items;
         public List<ApartmentItem> Items
         {
-            get => _items; set
+            get => _items;
+            set
             {
                 _items = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged("Items");
             }
         }
 
@@ -31,7 +32,7 @@ namespace RieltorApp.NewViewModel
             set
             {
                 _showResult = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged("ShowResult");
             }
         }
         private Visibility _showAnimation;
@@ -41,7 +42,7 @@ namespace RieltorApp.NewViewModel
             set
             {
                 _showAnimation = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged("ShowAnimation");
             }
         }
         private Visibility _showStatus;
@@ -51,13 +52,39 @@ namespace RieltorApp.NewViewModel
             set
             {
                 _showStatus = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged("ShowStatus");
             }
         }
 
+        private string _sort;
+        public string Sort
+        {
+            get => _sort;
+            set
+            {
+                if(_sort != value)
+                {
+                    _sort = value;
+                    NotifyPropertyChanged("Sort");
+                    SortList();
+                }
+            }
+        }
+        private string _searchText = "";
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value.Trim();
+                NotifyPropertyChanged("SearchText");
+                Search();
+            }
+        }
         public ICommand ReturnToTop { get; set; }
         public ICommand OpenWebPage { get; set; }
         public ICommand AddFavorite { get; set; }
+       
         private ResultViewModel()
         {
             Items = new List<ApartmentItem>();
@@ -73,12 +100,10 @@ namespace RieltorApp.NewViewModel
                 ShowAnimation = Visibility.Hidden;
                 ShowStatus = Visibility.Hidden;
             });
-
             OpenWebPage = new BaseCommand(url =>
             {
                 System.Diagnostics.Process.Start(url.ToString());
             });
-
             AddFavorite = new BaseCommand(apart =>
             {
                 if(apart is ApartmentItem)
@@ -86,6 +111,42 @@ namespace RieltorApp.NewViewModel
                     FavoriteModel.AddFavorite(apart as ApartmentItem);
                 }
             });
+        }
+
+        private void SortList()
+        {
+            if(_items != null && _sort != null)
+            {
+                _items.Sort( (a1, a2) =>
+                {
+                    switch (_sort)
+                    {
+                        case "Цена ↑":
+                            return a1.Price == a2.Price ? 0 : a1.Price > a2.Price ? 1 : -1;
+                        case "Цена ↓":
+                            return a1.Price == a2.Price ? 0 : a1.Price > a2.Price ? -1 : 1;
+                        case "Комнаты ↑":
+                            return a1.RoomCount == a2.RoomCount ? 0 : a1.RoomCount > a2.RoomCount ? 1 : -1;
+                        case "Комнаты ↓":
+                            return a1.RoomCount == a2.RoomCount ? 0 : a1.RoomCount > a2.RoomCount ? -1 : 1;
+                        default: return 0;
+                    }
+                });
+                Items = new List<ApartmentItem>(_items);
+            }
+        }
+        
+        private void Search()
+        {
+            //_tempItems = new List<ApartmentItem>()
+            if (!string.IsNullOrWhiteSpace(_searchText))
+                _items.ForEach(apart =>
+                {
+                    if (apart.Address.DistrictInfo.Contains(_searchText) || apart.Address.Info.Contains(_searchText) || apart.Info.Contains(_searchText))
+                        apart.Visibility = Visibility.Visible;
+                    else apart.Visibility = Visibility.Collapsed;
+                });
+            else _items.ForEach(apart => apart.Visibility = Visibility.Visible);
         }
     }
 }

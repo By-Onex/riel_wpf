@@ -10,6 +10,8 @@ namespace RieltorApp.DB
     public enum DBTable
     {
         FavoriteApartment,
+        AutoSearchApartment,
+        FoundApartment
     }
     public static class DataBase
     {
@@ -18,13 +20,8 @@ namespace RieltorApp.DB
         public static void Connect()
         {
             db = new LiteDatabase("Filename=./data.db;Connection=shared");
-
-            db.GetCollection<ApartmentItem>("FavoriteApartment").EnsureIndex(a => a.Address);
-        }
-
-        public static List<ApartmentItem> GetFavoriteApartment()
-        {
-            return db.GetCollection<ApartmentItem>("FavoriteApartment").FindAll().ToList();
+            db.GetCollection<ApartmentItem>(DBTable.FavoriteApartment.ToString()).EnsureIndex(a => a.Address);
+            db.GetCollection<FoundApartment>(DBTable.FoundApartment.ToString()).EnsureIndex(a => a.apartment.Address);
         }
 
         public static void Insert<T>(T item, DBTable collectionName)
@@ -32,9 +29,14 @@ namespace RieltorApp.DB
             db.GetCollection<T>(collectionName.ToString()).Insert(item);
         }
 
-        public static void Delete<T>(BsonValue id, DBTable collectionName)
+        public static void Update<T>(T item, DBTable collectionName)
         {
-            db.GetCollection<T>(collectionName.ToString()).Delete(id);
+            db.GetCollection<T>(collectionName.ToString()).Update(item);
+        }
+
+        public static void Delete(BsonValue id, DBTable collectionName)
+        {
+            db.GetCollection(collectionName.ToString()).Delete(id);
         }
 
         public static List<T> GetCollectionList<T>(DBTable collectionName)
@@ -42,5 +44,9 @@ namespace RieltorApp.DB
             return db.GetCollection<T>(collectionName.ToString()).FindAll().ToList();
         }
 
+        public static ILiteQueryable<T> Query<T>(DBTable collectionName)
+        {
+            return db.GetCollection<T>(collectionName.ToString()).Query();
+        }
     }
 }

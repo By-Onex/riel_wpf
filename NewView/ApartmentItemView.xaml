@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RieltorApp.NewViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="330" d:DesignWidth="200" Margin="10,10,10,10">
-    <StackPanel >
+             >
+    <StackPanel Visibility="{Binding Visibility}" Margin="10,10,10,10">
         <Label Style="{StaticResource Def_Label}" Content="{Binding Address.DistrictInfo}" HorizontalAlignment="Center" Padding="3"/>
         <Label Style="{StaticResource Def_Label}" Content="{Binding Address.Info}" HorizontalAlignment="Center"  Padding="3"/>
         <Label Style="{StaticResource Def_Label}" Content="{Binding Info}" HorizontalAlignment="Center"  Padding="3"/>

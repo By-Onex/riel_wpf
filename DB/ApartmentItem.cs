@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RieltorApp.DB
 {
@@ -38,6 +39,11 @@ namespace RieltorApp.DB
         }
         [LiteDB.BsonIgnore]
         public string ButtonText { get; set; } = "В избранное";
+
+        [LiteDB.BsonIgnore]
+        private Visibility _visibility = Visibility.Visible;
+        [LiteDB.BsonIgnore]
+        public Visibility Visibility { get => _visibility; set { if (value != _visibility) { _visibility = value; NotifyPropertyChanged("Visibility"); } } }
     }
 
     public class Address

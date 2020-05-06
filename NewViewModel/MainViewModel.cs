@@ -59,6 +59,8 @@ namespace RieltorApp.NewViewModel
             DataBase.Connect();
             PageContent = new StartMenuView().Content;
             PageStateText = "Добро пожаловать! С чем работать?";
+
+            AutoSearchModel.StartSearchApartment();
         }
 
         public void ChangePage(object contetPage)

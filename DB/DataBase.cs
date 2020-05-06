@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,11 @@ namespace RieltorApp.DB
         public static void Delete(BsonValue id, DBTable collectionName)
         {
             db.GetCollection(collectionName.ToString()).Delete(id);
+        }
+
+        public static void Delete<T>(Expression<Func<T, bool>> predicate, DBTable collectionName)
+        {
+            db.GetCollection<T>(collectionName.ToString()).DeleteMany(predicate);
         }
 
         public static List<T> GetCollectionList<T>(DBTable collectionName)

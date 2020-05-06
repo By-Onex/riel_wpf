@@ -128,6 +128,18 @@ namespace RieltorApp.NewViewModel
                 _searchViewModel.Description = _selectedItem.Description;
                 _searchViewModel.RoomCount = _searchViewModel.ConvertToText(_selectedItem.RoomCount);
 
+                _searchViewModel._searchModel.SearchType = _selectedItem.SearchType;
+                if (_searchViewModel._searchModel.SearchType == SearchType.Buy)
+                {
+                    _searchViewModel.IsBuy = true;
+                    _searchViewModel.IsArenda = false;
+                }
+                else
+                {
+                    _searchViewModel.IsBuy = false;
+                    _searchViewModel.IsArenda = true;
+                }
+
                 _searchViewModel.MinPrice = _selectedItem.MinPrice.ToString();
                 _searchViewModel.MaxPrice = _selectedItem.MaxPrice.ToString();
 

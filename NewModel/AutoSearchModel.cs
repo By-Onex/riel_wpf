@@ -131,6 +131,9 @@ namespace RieltorApp.NewModel
    
         public void DeleteAutoSearchItem(AutoSearchItem item)
         {
+            var remApart = DataBase.Query<FoundApartment>(DBTable.FoundApartment).Where(fa => item.Id == fa.AutoSearchId).ToList();
+            remApart.ForEach(ra => DataBase.Delete(ra.Id, DBTable.FoundApartment));
+            
             DataBase.Delete(item.Id, DBTable.AutoSearchApartment);
             AutoSearchViewModel.Instance.Items.Remove(item);
 
@@ -142,7 +145,7 @@ namespace RieltorApp.NewModel
 
         public void UpdateAutoSearchItem(AutoSearchItem item, SearchArgumentModel searchArgument)
         {
-           
+            item.SearchType = searchArgument.SearchType;
             item.MaxArea = searchArgument.MaxArea;
             item.MinArea = searchArgument.MinArea;
 

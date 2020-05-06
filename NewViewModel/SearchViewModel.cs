@@ -13,6 +13,8 @@ namespace RieltorApp.NewViewModel
         public SearchArgumentModel _searchModel { get; private set; }
         public ICommand SearchCommand { get; set; }
         public ICommand OpenPage { get; set; }
+        public ICommand SelectType { get; set; }
+        
         public string District
         {
             get => _searchModel.District;
@@ -136,6 +138,27 @@ namespace RieltorApp.NewViewModel
         private string _buttonText = "Добавить";
         public string ButtonText { get => _buttonText; set { _buttonText = value; NotifyPropertyChanged("ButtonText"); } }
 
+        private bool _isBuy = true;
+        public bool IsBuy
+        {
+            get => _isBuy;
+            set
+            {
+                _isBuy = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _isArenda = true;
+        public bool IsArenda
+        {
+            get => _isArenda;
+            set
+            {
+                _isArenda = value;
+                NotifyPropertyChanged();
+            }
+        }
         private int CheckValue(string val)
         {
             int num;
@@ -157,6 +180,21 @@ namespace RieltorApp.NewViewModel
             OpenPage = new BaseCommand((nextPage) =>
             {
                 MainViewModel.Instance.ChangePage(((UserControl)Activator.CreateInstance((Type)nextPage)).Content, "С чем работать?");
+            });
+
+            SelectType = new BaseCommand(st =>
+            {
+                _searchModel.SearchType = (string)st == "Buy" ? NewModel.SearchType.Buy : NewModel.SearchType.Arenda;
+                if (_searchModel.SearchType == SearchType.Buy)
+                {
+                    IsBuy = true;
+                    IsArenda = false;
+                }
+                else
+                {
+                    IsBuy = false;
+                    IsArenda = true;
+                }
             });
         }
 

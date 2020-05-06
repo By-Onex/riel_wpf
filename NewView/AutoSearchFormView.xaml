@@ -72,9 +72,17 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <GroupBox Header="Примечание"  Style="{StaticResource Def_GroupBox}">
-                    <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding Description}" VerticalAlignment="Stretch" MinWidth="400"/>
+                    <TextBox Style="{StaticResource Def_TextBox}" Text="{Binding Description}" VerticalAlignment="Stretch" MinWidth="260"/>
+                </GroupBox>
+
+                <GroupBox Header="Тип поиска"  Style="{StaticResource Def_GroupBox}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton Command="{Binding SelectType}" CommandParameter="Buy" IsChecked="{Binding IsBuy}">Покупка</RadioButton>
+                        <RadioButton Command="{Binding SelectType}" CommandParameter="Arenda" IsChecked="{Binding IsArenda}">Аренда</RadioButton>
+                    </StackPanel>
                 </GroupBox>
             </StackPanel>
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Width="100" Margin="0,20,20,0" Style="{StaticResource Def_Button}" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=SearchCommand}" CommandParameter="Null">
                     <TextBlock TextWrapping="Wrap" Text="{Binding ButtonText}"/>

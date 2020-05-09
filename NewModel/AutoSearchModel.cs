@@ -83,10 +83,6 @@ namespace RieltorApp.NewModel
             });
         }
 
-        private static void SearchApart()
-        {
-
-        }
         public void AddNewAutoSearchItem(SearchArgumentModel searchArgument)
         {
             var item = new AutoSearchItem();
@@ -161,12 +157,17 @@ namespace RieltorApp.NewModel
             item.RoomCount = searchArgument.RoomCount;
 
             item.Description = searchArgument.Description;
+            item.FoundApart = 0;
             item.Num = item.Num;
-            AutoSearchViewModel.Instance.Items[int.Parse(item.Num) - 1] = item;
 
+            AutoSearchViewModel.Instance.Items[int.Parse(item.Num) - 1] = item;
+            
             DataBase.Update(item, DBTable.AutoSearchApartment);
+
+            DataBase.Delete<FoundApartment>(apart => item.Id == apart.AutoSearchId, DBTable.FoundApartment);
+
         }
-   
+
         public void GetFoundApartment(AutoSearchItem item)
         {
             ResultViewModel.Instance.Items = DataBase.Query<FoundApartment>(DBTable.FoundApartment)

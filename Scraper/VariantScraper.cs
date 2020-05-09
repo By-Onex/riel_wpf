@@ -170,6 +170,7 @@ namespace RieltorApp.Scraper
                     argumentModels.ForEach(argumentModel =>
                     {
                         if (argumentModel.MaxPrice * 1000 >= apart.Price && argumentModel.MinPrice * 1000 <= apart.Price &&
+                        argumentModel.MaxArea >= apart.Area && argumentModel.MinArea <= apart.Area &&
                         argumentModel.MaxFloor >= apart.Floor && argumentModel.MinFloor <= apart.Floor &&
                         argumentModel.MaxStoreys >= apart.Storeys && argumentModel.MinStoreys <= apart.Storeys &&
                         (argumentModel.District == "Любой" || apart.Address.District.Contains(argumentModel.District)) &&
